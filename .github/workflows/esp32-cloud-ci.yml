@@ -1,0 +1,44 @@
+name: ESP32 Cloud checks
+on:
+  push:
+    branches:
+      - 'feat/esp32-ai-cloud-*'
+    paths:
+      - 'esp32-cloud/**'
+      - 'render.yaml'
+      - '.github/workflows/esp32-cloud-ci.yml'
+  pull_request:
+    paths:
+      - 'esp32-cloud/**'
+      - 'render.yaml'
+      - '.github/workflows/esp32-cloud-ci.yml'
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate backend JavaScript
+        run: |
+          node --check esp32-cloud/backend/server.mjs
+          node --check esp32-cloud/backend/lib.mjs
+          node --check esp32-cloud/backend/lib.test.mjs
+      - name: Run backend unit tests
+        working-directory: esp32-cloud/backend
+        run: npm test
+      - name: Build Cloudflare Pages dashboard
+        working-directory: esp32-cloud/frontend
+        env:
+          PUBLIC_API_URL: https://example.onrender.com
+          PUBLIC_GOOGLE_CLIENT_ID: example.apps.googleusercontent.com
+        run: |
+          npm run build
+          test -s dist/index.html
+          test -s dist/app.js
+          test -s dist/config.js
+          test -s dist/_headers
