@@ -7,7 +7,7 @@
  */
 (function () {
   'use strict';
-  const SAVE='bilabot-connection-v2', SESSION='bilabot-transport-session-v2';
+  const SAVE='trinhduyet-connection-v2', SESSION='trinhduyet-transport-session-v2';
   const ui=id=>document.getElementById(id), official='https://xiaozhi.me/console/agents';
   const fixed=window.BILABOT_CONFIG||{};
   let saved={};try{saved=JSON.parse(localStorage.getItem(SAVE)||'{}')}catch{}
