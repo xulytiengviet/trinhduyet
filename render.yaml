@@ -1,0 +1,35 @@
+# ESP32 Cloud management API. Review resource pricing in Render before applying.
+services:
+  - type: web
+    name: trinhduyet-esp32-cloud-api
+    runtime: node
+    region: singapore
+    rootDir: esp32-cloud/backend
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trinhduyet-esp32-pg
+          property: connectionString
+      - key: FIRMWARE_VERSION
+        value: ""
+      - key: FIRMWARE_BOARD
+        value: ""
+      - key: FIRMWARE_URL
+        value: ""
+      - key: FIRMWARE_SHA256
+        value: ""
+databases:
+  - name: trinhduyet-esp32-pg
+    region: singapore
+    ipAllowList: []
+    databaseName: esp32cloud
+    user: esp32cloud

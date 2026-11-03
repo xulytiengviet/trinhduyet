@@ -1,3 +1,13 @@
+# Trình Duyệt — ESP32 AI Cloud (phần mở rộng)
+
+> **Tính năng mới (nhánh ESP32 Cloud):** giao diện Cloudflare Pages tiếng Việt, Google Identity Services, backend Node/PostgreSQL trên Render, ghép nối ESP32 bằng mã 6 chữ số, theo dõi thiết bị, và firmware OTA HTTPS. Trình duyệt ESP32 ảo kế thừa BilaBot/Olivia AI. **Đây là tính năng bổ sung; lõi XiaoZhi Go bên dưới không bị thay thế.**
+
+**[Mã nguồn, cấu hình triển khai và tài liệu ESP32 AI Cloud](esp32-cloud/README.md)** · [Frontend](esp32-cloud/frontend/) · [Backend](esp32-cloud/backend/) · [Firmware ESP-IDF](esp32-cloud/firmware/).
+
+**Trạng thái:** mã nguồn và quy trình CI đã được cung cấp; cần cấu hình Google OAuth, triển khai Cloudflare/Render, cấp phát khóa cho ESP32 và kiểm thử thực tế. Mã 6 chữ số của ESP32 Cloud không phải mã kích hoạt XiaoZhi.
+
+---
+
 # 🚀 xiaozhi-esp32-server-golang
 
 > **Xiaozhi AI Backend for ESP32 Devices**
