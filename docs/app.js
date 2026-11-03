@@ -5,7 +5,7 @@
   const id = (s) => document.getElementById(s);
   let token = null;
   let devices = [];
-  const views = {overview:'TỔNG QUAN',devices:'THIẾT BỊ ESP32',virtual:'ESP32 ẢO',ota:'FIRMWARE OTA',guide:'TÀI LIỆU'};
+  const views = {chat:'TRÒ CHUYỆN AI',overview:'TỔNG QUAN',devices:'THIẾT BỊ ESP32',virtual:'ESP32 ẢO',ota:'FIRMWARE OTA',guide:'TÀI LIỆU'};
   function notify(message, bad=false) {
     const node=id('toast');
     node.textContent=message;
@@ -147,7 +147,7 @@
       id('claim-device').reset();await loadDevices();notify('Ghép nối thiết bị thành công');
     }catch(err){notify(err.message,true);}
   });
-  show(views[location.hash.slice(1)]?location.hash.slice(1):'overview');
+  show(views[location.hash.slice(1)]?location.hash.slice(1):'chat');
   health();
   // Google Identity script is deferred; retry briefly while it initializes.
   let checks=0;
