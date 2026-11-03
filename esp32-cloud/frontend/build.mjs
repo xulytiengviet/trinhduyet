@@ -5,8 +5,8 @@ for (const file of ['index.html','app.js','style.css']) {
   await copyFile(new URL('./'+file, import.meta.url), new URL('./'+file, dir));
 }
 const c = {
-  apiBase: (process.env.PUBLIC_API_URL || '').replace(/\/+$/, ''),
-  googleClientId: process.env.PUBLIC_GOOGLE_CLIENT_ID || ''
+  apiBase: (process.env.PUBLIC_API_URL || 'https://trinhduyet-esp32-cloud-api.onrender.com').replace(/\/+$/, ''),
+  googleClientId: process.env.PUBLIC_GOOGLE_CLIENT_ID || '953301988621-v9osii8gqjhconp13guff25e20o3f3o1.apps.googleusercontent.com'
 };
 await writeFile(new URL('./config.js', dir),
   'window.ESP32_CLOUD_CONFIG = '+JSON.stringify(c).replace(/</g,'\\u003c')+';\n');
