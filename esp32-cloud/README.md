@@ -1,5 +1,26 @@
 # Trình Duyệt ESP32 AI Cloud
 
+## Cập nhật triển khai 03/11/2026
+
+**Đã tạo trên Render (My Workspace):**
+- Web Service: [trinhduyet-esp32-cloud-api](https://dashboard.render.com/web/srv-dbkkj559fdbs73bjjukg), URL `https://trinhduyet-esp32-cloud-api.onrender.com`, gói Free, khu vực Singapore.
+- PostgreSQL: [trinhduyet-esp32-pg](https://dashboard.render.com/d/dpg-dbkkims9v7es73ek5pmg-a), gói Free, khu vực Singapore, hạn sử dụng 03/12/2026 theo Render.
+
+**Giao diện GitHub Pages:** `https://xulytiengviet.github.io/trinhduyet/` có mã nguồn ở thư mục gốc (`index.html`), `docs/` và `esp32-cloud/frontend/`. Việc xuất bản thực tế còn phụ thuộc cấu hình Pages trong Settings → Pages.
+
+**Đang ở chế độ setup_required:** Render API khởi động và trả JSON trạng thái trung thực, không báo đã ghép nối thiết bị. Còn phải cài GOOGLE_CLIENT_ID và DATABASE_URL trong Render. `ALLOWED_ORIGINS=https://xulytiengviet.github.io,https://xulytiengviet.github.io/trinhduyet` đã được cấu hình (Origin trình duyệt thực tế là `https://xulytiengviet.github.io`).
+
+**Hoàn tất hai biến riêng tư:** Tại [Render Web Service → Environment](https://dashboard.render.com/web/srv-dbkkj559fdbs73bjjukg/env), thêm:
+1. `DATABASE_URL` = Internal Database URL lấy trực tiếp từ trang database Render. Không chép URL này vào GitHub, Cloudflare hoặc trao đổi công khai.
+2. `GOOGLE_CLIENT_ID` = OAuth Web Client ID trong [Google Cloud Credentials](https://console.cloud.google.com/apis/credentials); tại OAuth Authorized JavaScript origins thêm chính xác `https://xulytiengviet.github.io`.
+
+Tại GitHub Pages, thay `googleClientId: ""` trong `config.js` và `docs/config.js` bằng cùng Google OAuth Web Client ID (Client ID công khai được; Client Secret không được công bố). Sau thay đổi cần kiểm tra `GET /api/health` trả `status: "ok"`, đăng nhập Google, tạo thiết bị và ghép nối với ESP32 thật.
+
+**Cloudflare Pages (tuỳ chọn):** Kết nối repo, build root `esp32-cloud/frontend`, build `npm run build`, output `dist`, hai build env `PUBLIC_API_URL=https://trinhduyet-esp32-cloud-api.onrender.com` và `PUBLIC_GOOGLE_CLIENT_ID=...`. Sau khi có Pages URL, thêm origin đó vào `ALLOWED_ORIGINS` trên Render và Google OAuth Authorized JavaScript origins.
+
+---
+
+
 Đây là **thành phần bổ sung** của repository [trinhduyet](https://github.com/xulytiengviet/trinhduyet), không thay thế hoặc sửa lõi Go XiaoZhi hiện có.
 
 ## Các thành phần
