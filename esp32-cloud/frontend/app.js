@@ -40,8 +40,10 @@
     try {
       const result=await request('/api/health');
       const ok=result.status==='ok';
-      id('api-status').textContent=ok?'Trực tuyến':'Có lỗi';
-      id('service-health').textContent=ok?'HOẠT ĐỘNG':'LỖI';
+      const setup=result.status==='setup_required';
+      id('api-status').textContent=ok?'Trực tuyến':setup?'Chờ cấu hình':'Có lỗi';
+      id('service-health').textContent=ok?'SẴN SÀNG':setup?'CHỜ OAUTH / DATABASE':'LỖI';
+      id('service-health').title=setup?'Còn thiếu: '+(result.missing||[]).join(', '):'';
       id('api-dot').classList.toggle('online',ok);
     } catch(e) {
       id('api-dot').classList.remove('online');
