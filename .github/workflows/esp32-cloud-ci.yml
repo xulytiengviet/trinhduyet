@@ -2,6 +2,7 @@ name: ESP32 Cloud checks
 on:
   push:
     branches:
+      - main
       - 'feat/esp32-ai-cloud-*'
     paths:
       - 'esp32-cloud/**'
