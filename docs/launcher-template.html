@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f3f0fc">
+  <meta name="description" content="Trình duyệt của bạn là thiết bị ESP32 ảo. Mở, ghép mã XiaoZhi và trò chuyện AI bằng văn bản hoặc giọng nói mà không cần phần cứng.">
+  <title>Trình Duyệt ESP32 · Mở → Ghép → Trò chuyện</title>
+  <link rel="icon" type="image/svg+xml" href="./device/static/logo/favicon.svg">
+  <link rel="stylesheet" href="./launcher.css">
+  <script defer src="./launcher.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <a class="identity" href="./" aria-label="Trang chủ Trình Duyệt ESP32"><span class="logo" aria-hidden="true">◈</span><span><strong>TRÌNH DUYỆT</strong><small>ESP32 / XIAOZHI</small></span></a>
+      <div class="top-actions">
+        <span class="top-note">ESP32 ảo · Không cần cài đặt</span>
+        <a class="text-link" href="./cloud.html">Quản lý ESP32 thật <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="sparkle">✦</span> BROWSER AS ESP32 · XIAOZHI AI</span>
+          <h1>Mở. Ghép. <em>Trò chuyện.</em></h1>
+          <p>Biến trình duyệt thành một thiết bị ESP32 ảo, dùng AI trực tiếp bằng giọng nói hoặc văn bản. Không cần mua bo mạch, cài app hay đăng nhập Google vào trang này.</p>
+        </div>
+        <div class="hero-graphic" aria-hidden="true">
+          <div class="halo halo-one"></div><div class="halo halo-two"></div>
+          <div class="chip"><span class="chip-pin pin-top"></span><span class="chip-pin pin-bottom"></span><b>ESP<span>32</span></b><small>VIRTUAL DEVICE</small></div>
+          <div class="wave wave-a"></div><div class="wave wave-b"></div>
+        </div>
+      </section>
+      <nav class="progress" aria-label="Ba bước kết nối">
+        <div class="progress-step current" data-step="open"><span class="progress-number">01</span><span><strong>Mở</strong><small>Khởi tạo thiết bị</small></span></div>
+        <span class="progress-divider" aria-hidden="true">→</span>
+        <div class="progress-step" data-step="pair"><span class="progress-number">02</span><span><strong>Ghép</strong><small>Mã XiaoZhi thực</small></span></div>
+        <span class="progress-divider" aria-hidden="true">→</span>
+        <div class="progress-step" data-step="chat"><span class="progress-number">03</span><span><strong>Trò chuyện</strong><small>WebSocket / Opus</small></span></div>
+      </nav>
+      <div class="workspace">
+        <aside class="controls" aria-label="Điều khiển ESP32 ảo">
+          <div class="control-head">
+            <div><span class="micro-label">THIẾT BỊ CỦA BẠN</span><h2>ESP32 trong trình duyệt</h2></div>
+            <span class="state-indicator" id="device-indicator" aria-hidden="true"></span>
+          </div>
+          <p class="status-message" id="status-message" role="status" aria-live="polite">Đang khởi tạo lõi thiết bị ảo…</p>
+          <div class="identity-line"><span>Giao thức</span><strong>XiaoZhi · OTA + WSS</strong></div>
+          <div class="identity-line"><span>Phần cứng</span><strong>Không yêu cầu</strong></div>
+          <div class="flow-actions">
+            <section class="action-card action-open" id="action-open">
+              <div class="action-label"><span>01</span><strong>Mở thiết bị</strong></div>
+              <p>ESP32 ảo được nạp ngay khi mở trang. Mỗi trình duyệt lưu danh tính thiết bị cục bộ.</p>
+              <button type="button" class="action-button secondary" id="open-device">Mở / kiểm tra thiết bị <span aria-hidden="true">↗</span></button>
+            </section>
+            <section class="action-card action-pair" id="action-pair">
+              <div class="action-label"><span>02</span><strong>Ghép XiaoZhi</strong></div>
+              <p>Nhận mã 6 chữ số do máy chủ XiaoZhi cấp, rồi nhập mã tại XiaoZhi.me.</p>
+              <div id="activation-block" class="activation-block" hidden>
+                <span>MÃ KÍCH HOẠT THỰC</span>
+                <div class="code-row"><strong id="activation-code">······</strong><button id="copy-activation" type="button">Sao chép</button></div>
+                <small id="activation-note">Nhập mã tại XiaoZhi trước khi hết hạn.</small>
+              </div>
+              <button type="button" class="action-button primary" id="pair-device">Lấy mã và ghép thiết bị <span aria-hidden="true">→</span></button>
+              <a href="https://xiaozhi.me/console/agents" target="_blank" rel="noopener noreferrer" class="small-link">Mở XiaoZhi để nhập mã ↗</a>
+            </section>
+            <section class="action-card action-chat" id="action-chat">
+              <div class="action-label"><span>03</span><strong>Trò chuyện</strong></div>
+              <p>Khi XiaoZhi xác nhận ghép nối, bật micro và trò chuyện trong khung bên cạnh.</p>
+              <button type="button" class="action-button soft" id="connect-device">Kết nối & trò chuyện <span aria-hidden="true">→</span></button>
+            </section>
+          </div>
+          <details class="help">
+            <summary>Cần trợ giúp?</summary>
+            <p>Hãy mở XiaoZhi, chọn trợ lý và thêm thiết bị bằng mã 6 chữ số. Mã ESP32 Cloud của Render là quy trình khác, không dùng để ghép XiaoZhi.</p>
+            <p>Nếu gateway BilaBot chưa hoạt động, trang sẽ báo lỗi thật thay vì tự tạo mã giả. Bạn có thể mở <a href="./device/index.html" target="_blank" rel="noopener noreferrer">thiết bị toàn màn hình</a> để xem thông báo kỹ thuật.</p>
+          </details>
+        </aside>
+        <section class="viewer" aria-label="Thiết bị ESP32 ảo chạy trực tiếp">
+          <header class="viewer-top">
+            <div class="viewer-name"><span class="device-spot">✦</span><div><strong>ESP32 AI · Thiết bị ảo</strong><small>Olivia/BilaBot Engine · Chạy trong trình duyệt này</small></div></div>
+            <div class="viewer-actions"><button type="button" id="reload-device" title="Khởi động lại thiết bị">↻</button><a href="./device/index.html" target="_blank" rel="noopener noreferrer" title="Mở toàn màn hình">↗</a></div>
+          </header>
+          <iframe id="native-esp32" src="./device/index.html" title="Thiết bị ESP32 ảo — XiaoZhi client thực" allow="microphone; camera" loading="eager" referrerpolicy="same-origin"></iframe>
+          <div class="viewer-bottom"><span><span class="live-dot"></span> Lõi thiết bị hoạt động cục bộ; kết nối AI đi qua gateway XiaoZhi được cấu hình</span><span id="viewer-state">Chờ khởi tạo</span></div>
+        </section>
+      </div>
+      <footer><span>Trình Duyệt ESP32 · Long Ngo · Kế thừa <a href="https://github.com/roalfb/olivia-ai" target="_blank" rel="noopener noreferrer">Olivia AI</a> và <a href="https://github.com/xulytiengviet/Bilabot" target="_blank" rel="noopener noreferrer">BilaBot</a> · MIT</span><a href="https://github.com/xulytiengviet/trinhduyet" target="_blank" rel="noopener noreferrer">Mã nguồn GitHub ↗</a></footer>
+    </main>
+  </div>
+</body>
+</html>
+ 
