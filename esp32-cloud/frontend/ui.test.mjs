@@ -34,3 +34,15 @@ test('primary UI has no mock AI chat reply and keeps real engine boundary',()=>{
   assert.match(html,/id="google-button"/);
   assert.match(html,/id="claim-device"/);
 });
+
+test('three-step guide is accessible, collapsible, and keeps genuine linking',()=>{
+  assert.match(html,/id="guide-toggle"[^>]*aria-expanded="true"/);
+  assert.match(html,/id="quick-guide"/);
+  assert.match(html,/id="guide-close"/);
+  assert.match(html,/Lấy mã thực/);
+  assert.match(html,/Mở XiaoZhi/);
+  assert.match(html,/Quay về khung AI/);
+  assert.match(shell,/guide-collapsed/);
+  assert.match(shell,/setGuideVisible\(false\)/);
+  assert.match(style,/Compact quick-start v2/);
+});
