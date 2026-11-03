@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090c12">
-  <meta name="description" content="Trình Duyệt ESP32 AI Cloud – thiết bị thật, thiết bị ảo, đăng nhập Google và OTA">
-  <title>BilaBot AI · Trình Duyệt ESP32 Cloud</title>
+  <meta name="description" content="Chatbot tiếng Việt dùng ngay trên trình duyệt, hướng dẫn ghép nối XiaoZhi, quản lý ESP32 và OTA.">
+  <title>BilaBot AI — Trò chuyện & kết nối ESP32</title>
   <link rel="stylesheet" href="./docs/style.css">
   <script defer src="https://accounts.google.com/gsi/client"></script>
   <script defer src="./docs/config.js"></script>
@@ -14,86 +14,70 @@
 </head>
 <body>
 <div class="shell">
-  <aside class="sidebar">
-    <div class="brand"><span class="brand-logo">✦</span><div><b>BILABOT AI</b><small>TRÌNH DUYỆT ESP32 CLOUD</small></div><button type="button" class="theme-toggle" id="theme-switch" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối">☾</button></div>
-    <div class="side-caption">KHÔNG GIAN TRỢ LÝ</div>
+  <aside class="sidebar" aria-label="Điều hướng">
+    <div class="brand">
+      <span class="brand-logo" aria-hidden="true">✦</span>
+      <div><b>BilaBot AI</b><small>XiaoZhi · ESP32 Cloud</small></div>
+      <button type="button" class="theme-toggle" id="theme-switch" title="Đổi sáng/tối" aria-label="Đổi giao diện sáng/tối">☾</button>
+    </div>
+    <div class="side-caption">KHÔNG GIAN LÀM VIỆC</div>
     <nav id="nav">
-      <button type="button" class="nav-item active" data-view="chat"><span>◉</span> Trò chuyện AI</button>
-      <button type="button" class="nav-item active" data-view="overview"><span>◫</span> Tổng quan</button>
-      <button type="button" class="nav-item" data-view="devices"><span>▣</span> Thiết bị ESP32</button>
-      <button type="button" class="nav-item" data-view="virtual"><span>◎</span> ESP32 ảo / Olivia</button>
-      <button type="button" class="nav-item" data-view="ota"><span>⇧</span> Firmware OTA</button>
-      <button type="button" class="nav-item" data-view="guide"><span>⌘</span> Tài liệu & triển khai</button>
+      <button type="button" data-view="chat" class="nav-item active"><span>◉</span> Trò chuyện ngay</button>
+      <button type="button" data-view="devices" class="nav-item"><span>▣</span> Thiết bị ESP32</button>
+      <button type="button" data-view="ota" class="nav-item"><span>⇧</span> Cập nhật OTA</button>
+      <button type="button" data-view="overview" class="nav-item"><span>◎</span> Tài khoản & trạng thái</button>
     </nav>
-    <div class="side-bottom">
-      <div class="system-row"><span class="status-dot" id="api-dot"></span><span>Render API</span><strong id="api-status">Chưa kiểm tra</strong></div>
-      <div class="system-row"><span class="status-dot white"></span><span>Cloudflare</span><strong>Frontend</strong></div>
-      <div class="side-foot">Powered by XiaoZhi / Olivia AI concepts<br>Long Ngo · Dự án nguồn mở</div>
+    <details class="advanced-nav">
+      <summary>Thiết lập nâng cao</summary>
+      <button type="button" data-view="virtual" class="nav-item"><span>↗</span> ESP32 ảo / Olivia</button>
+      <button type="button" data-view="guide" class="nav-item"><span>⌘</span> Hướng dẫn triển khai</button>
+    </details>
+    <div class="sidebar-bottom">
+      <div class="ready-message"><span class="green-dot"></span> Dùng trực tiếp trên web</div>
+      <p>Không cần cài app cho chế độ chatbot. ESP32 thật cần firmware tương thích.</p>
+      <div class="system-row"><span>Render · ESP32 Cloud</span><strong id="api-status">Đang kiểm tra</strong><span id="api-dot" class="status-dot"></span></div>
+      <a class="source-link" href="https://github.com/xulytiengviet/trinhduyet" target="_blank" rel="noopener noreferrer">Mã nguồn & hướng dẫn ↗</a>
     </div>
   </aside>
   <main class="main">
     <header class="topbar">
-      <div class="breadcrumb">BILABOT / ESP32 <span>/</span> <b id="view-name">TỔNG QUAN</b></div>
-      <div class="topright"><span class="live-chip"><span class="status-dot white"></span> XIAOZHI AI STUDIO</span><span id="profile" class="profile">Chưa đăng nhập</span></div>
+      <div class="breadcrumb">BILABOT AI <span>/</span> <b id="view-name">TRÒ CHUYỆN AI</b></div>
+      <div class="topright"><span class="live-chip">✦ Trợ lý tiếng Việt</span><span id="profile" class="profile">Chưa đăng nhập Google</span></div>
     </header>
     <div class="content">
-<section class="view" id="view-chat" hidden>
-  <div class="olivia-workspace">
-    <aside class="olivia-contacts" aria-label="Trợ lý và thiết bị">
-      <div class="olivia-contacts-header">
-        <span class="tiny-label">HỘP THOẠI</span>
-        <h2>Trợ lý AI <span class="assistant-count">02</span></h2>
-        <p>Thiết bị ảo và ESP32 thật</p>
-      </div>
-      <div class="assistant-list">
-        <button class="assistant-entry selected" type="button" id="assistant-bilabot">
-          <span class="assistant-pic">✦</span>
-          <span class="assistant-entry-main"><strong>BilaBot · XiaoZhi</strong><small>Giọng nói · Hình ảnh · MCP</small></span>
-          <span class="assistant-mini-dot"></span>
-        </button>
-        <button class="assistant-entry" type="button" data-view="devices" id="assistant-esp32">
-          <span class="assistant-pic physical">▣</span>
-          <span class="assistant-entry-main"><strong>ESP32 của tôi</strong><small>Quản lý qua tài khoản Google</small></span>
-        </button>
-      </div>
-      <div class="olivia-contacts-help">
-        <div class="mini-orb">◎</div>
-        <strong>Trình duyệt thành ESP32</strong>
-        <p>Trải nghiệm AI mà không cần phần cứng. Mỗi phiên trợ lý được ghép nối riêng tại XiaoZhi.</p>
-        <a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer">Lấy mã kích hoạt XiaoZhi <span>↗</span></a>
-      </div>
-      <div class="olivia-contacts-bottom">
-        <span class="assist-dot"></span> Kết nối AI phụ thuộc gateway BilaBot
-      </div>
-    </aside>
-    <div class="olivia-chat">
-      <header class="olivia-chat-header">
-        <div class="chat-person">
-          <span class="chat-avatar">✦</span>
-          <div><strong>BilaBot AI</strong><small>Trợ lý giọng nói · kế thừa Olivia AI</small></div>
+      <section class="view chat-view" id="view-chat" hidden>
+        <div class="chat-layout">
+          <div class="chat-stage">
+            <div class="chat-heading">
+              <div class="chat-profile"><span class="chat-avatar">✦</span><div><strong>BilaBot · Trợ lý AI</strong><small>XiaoZhi / Olivia · giọng nói và văn bản</small></div></div>
+              <div class="chat-actions">
+                <a class="quiet-link" target="_blank" rel="noopener noreferrer" href="https://xulytiengviet.github.io/Bilabot/#bb-setup">Lấy mã XiaoZhi</a>
+                <a class="quiet-link" target="_blank" rel="noopener noreferrer" href="https://xulytiengviet.github.io/Bilabot/">Mở riêng ↗</a>
+              </div>
+            </div>
+            <div id="olivia-intro" class="chat-intro">
+              <div class="intro-text"><b>Xin chào! Bắt đầu trò chuyện với BilaBot.</b><span>Không cần cài phần mềm. Nếu chưa ghép nối XiaoZhi, xem hướng dẫn 3 bước bên phải.</span></div>
+              <button id="hide-ai-intro" type="button" aria-label="Ẩn lời giới thiệu">×</button>
+            </div>
+            <iframe id="olivia-ai-frame" class="olivia-ai-frame" title="Trợ lý BilaBot XiaoZhi" src="https://xulytiengviet.github.io/Bilabot/" loading="eager" allow="microphone; camera" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="chat-foot"><span>Tính năng AI hoạt động qua BilaBot và gateway XiaoZhi; trạng thái kết nối được hiển thị trong ứng dụng BilaBot.</span><button id="reload-ai-frame" type="button" title="Tải lại trợ lý">Tải lại ↻</button></div>
+          </div>
+          <aside class="setup-panel" aria-label="Hướng dẫn bắt đầu">
+            <div class="setup-topline"><span>HƯỚNG DẪN NHANH</span><span class="step-chip">3 BƯỚC</span></div>
+            <h1>Vào là dùng.<br><em>Không cần cài app.</em></h1>
+            <p class="setup-lead">Trợ lý đã mở bên trái. Khi XiaoZhi yêu cầu ghép nối, thực hiện lần lượt các bước sau.</p>
+            <ol class="quick-steps">
+              <li><span class="step-num">01</span><div><strong>Mở trợ lý</strong><p>Chọn trợ lý trong khung BilaBot, nhấn kết nối hoặc lấy mã kích hoạt.</p><a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer">Lấy mã thực ↗</a></div></li>
+              <li><span class="step-num">02</span><div><strong>Ghép mã tại XiaoZhi</strong><p>Đăng nhập dịch vụ XiaoZhi và nhập mã sáu chữ số được cấp từ BilaBot.</p><a href="https://xiaozhi.me/console/agents" target="_blank" rel="noopener noreferrer">Mở XiaoZhi ↗</a></div></li>
+              <li><span class="step-num">03</span><div><strong>Trò chuyện</strong><p>Quay lại BilaBot, cho phép dùng micro nếu cần. Chỉ bắt đầu sau khi ứng dụng xác nhận kết nối.</p><button type="button" id="focus-assistant" class="inline-action">Quay về khung AI →</button></div></li>
+            </ol>
+            <a class="primary-launch" href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer">Mở BilaBot toàn màn hình ↗</a>
+            <details class="setup-faq"><summary>Tôi có cần ESP32 hoặc Gmail không?</summary><p>Chế độ chatbot trên trình duyệt không cần phần cứng ESP32 hay đăng nhập Google vào Trình Duyệt. Tài khoản XiaoZhi có thể cần cho việc kích hoạt. Chỉ khi quản lý ESP32 thật mới cần đăng nhập Google và nạp firmware.</p></details>
+            <details class="setup-faq"><summary>Không nhận được mã kích hoạt?</summary><p>Kiểm tra gateway trong BilaBot. Mã XiaoZhi do máy chủ cấp thật, không phải mã ghép nối ESP32 Cloud của Render. Nếu gateway chưa được cấu hình, không thể cấp mã.</p></details>
+          </aside>
         </div>
-        <div class="chat-actions">
-          <a title="Kết nối trên trang đầy đủ" href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer" class="chat-action">↗ <span>Mở cửa sổ riêng</span></a>
-          <a title="Lấy mã kích hoạt" href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer" class="chat-action">⌘ <span>Mã XiaoZhi</span></a>
-        </div>
-      </header>
-      <div class="olivia-chat-intro" id="olivia-intro">
-        <div class="big-orb"><div class="orb-eye">✦</div></div>
-        <h2>Xin chào! Tôi là BilaBot.</h2>
-        <p>Không gian trò chuyện AI theo phong cách Olivia. Nhắn tin, nói chuyện bằng micro, gửi ảnh và ghép nối trợ lý qua XiaoZhi trong cửa sổ bên dưới.</p>
-        <div class="intro-actions"><a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer" class="button">Lấy mã OTA XiaoZhi ↗</a><button type="button" class="button outline" id="hide-ai-intro">Ẩn giới thiệu</button></div>
-      </div>
-      <div class="embed-disclaimer">
-        <span class="embed-pill">BILABOT / OLIVIA ENGINE</span>
-        <span>Trợ lý hoạt động qua trang BilaBot; quyền micro và camera do trình duyệt cấp</span>
-        <button type="button" id="reload-ai-frame" title="Tải lại trợ lý">↻</button>
-      </div>
-      <iframe class="olivia-ai-frame" id="olivia-ai-frame" src="https://xulytiengviet.github.io/Bilabot/" title="BilaBot – Trợ lý XiaoZhi tiếng Việt" loading="eager" allow="microphone; camera" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      <div class="frame-footer">Nếu khung hội thoại không hoạt động do chính sách nhúng hoặc gateway chưa sẵn sàng: <a href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer">mở BilaBot trực tiếp ↗</a></div>
-    </div>
-  </div>
-</section>
-      <div class="announcement"><span class="new-tag">NÂNG CẤP</span> Kết nối phần cứng ESP32 thật với giao diện AI ảo. Mã kích hoạt của hệ thống này khác với mã XiaoZhi.</div>
+      </section>
+      <div class="announcement"><span class="new-tag">DÀNH CHO ESP32 THẬT</span> Tính năng tài khoản, quản lý thiết bị và firmware là phần mở rộng tùy chọn; không bắt buộc để mở chatbot.</div>
       <section class="view" id="view-overview">
         <div class="eyebrow">CONTROL CENTER / 001</div><h1>Điều khiển ESP32.<br><em>Từ trình duyệt.</em></h1>
         <p class="lead">Đăng nhập Google, đăng ký thiết bị, ghép nối bằng mã sáu chữ số, theo dõi kết nối và kiểm tra firmware OTA. Thiết bị ảo BilaBot kế thừa Olivia AI sẵn có.</p>
@@ -103,13 +87,13 @@
           <article class="metric"><div class="metric-label">HOẠT ĐỘNG GẦN ĐÂY</div><div class="metric-num" id="stat-online">—</div><small>Heartbeat trong 2 phút</small></article>
         </div>
         <div class="two-col">
-          <article class="panel"><div class="panel-kicker">01 / IDENTITY</div><h2>Đăng nhập bằng Google</h2><p>Chỉ dùng Google Identity để xác minh tài khoản; không yêu cầu quyền đọc Gmail hoặc mật khẩu.</p><div id="google-button" class="google-button"></div><div id="login-help" class="hint">Đang kiểm tra cấu hình Google...</div><button id="logout" type="button" class="text-button" hidden>Đăng xuất khỏi bảng điều khiển</button></article>
-          <article class="panel"><div class="panel-kicker">02 / CONNECTION</div><h2>Trạng thái dịch vụ</h2><div class="checkline"><span>Frontend Cloudflare Pages</span><b>ĐÃ TẢI</b></div><div class="checkline"><span>Render API</span><b id="service-health">CHƯA XÁC NHẬN</b></div><div class="checkline"><span>Google Identity</span><b id="google-status">CHƯA CẤU HÌNH</b></div><div class="checkline"><span>Thiết bị vật lý</span><b>CHỜ KẾT NỐI</b></div><button type="button" id="refresh-health" class="button outline">Kiểm tra lại kết nối ↻</button></article>
+          <article class="panel"><div class="panel-kicker">01 / IDENTITY</div><h2>Tài khoản Google (dành cho ESP32 thật)</h2><p>Chỉ dùng Google Identity để xác minh tài khoản; không yêu cầu quyền đọc Gmail hoặc mật khẩu.</p><div id="google-button" class="google-button"></div><div id="login-help" class="hint">Đang kiểm tra cấu hình Google...</div><button id="logout" type="button" class="text-button" hidden>Đăng xuất khỏi bảng điều khiển</button></article>
+          <article class="panel"><div class="panel-kicker">02 / CONNECTION</div><h2>Trạng thái dịch vụ</h2><div class="checkline"><span>Giao diện web</span><b>ĐÃ TẢI</b></div><div class="checkline"><span>Render API</span><b id="service-health">CHƯA XÁC NHẬN</b></div><div class="checkline"><span>Google Identity</span><b id="google-status">CHƯA CẤU HÌNH</b></div><div class="checkline"><span>Thiết bị vật lý</span><b>CHỜ KẾT NỐI</b></div><button type="button" id="refresh-health" class="button outline">Kiểm tra lại kết nối ↻</button></article>
         </div>
-        <div class="banner"><div><span class="eyebrow">DEVICE LAB</span><h2>Một hệ thống, hai loại thiết bị.</h2><p>ESP32 thật gửi heartbeat và nhận bản cập nhật; ESP32 ảo trong BilaBot sử dụng giao thức XiaoZhi, WebSocket, âm thanh Opus và mã kích hoạt riêng.</p></div><button class="button" id="go-virtual" type="button">Mở phòng thí nghiệm ↗</button></div>
+        <div class="banner"><div><span class="eyebrow">DEVICE LAB</span><h2>Một hệ thống, hai loại thiết bị.</h2><p>ESP32 thật gửi heartbeat và nhận bản cập nhật; ESP32 ảo trong BilaBot sử dụng giao thức XiaoZhi, WebSocket, âm thanh Opus và mã kích hoạt riêng.</p></div><button class="button" id="go-virtual" type="button">Mở BilaBot AI ↗</button></div>
       </section>
       <section class="view" id="view-devices" hidden>
-        <div class="eyebrow">DEVICE MANAGER / 002</div><h1>Thiết bị <em>ESP32.</em></h1><p class="lead">Tạo danh tính thiết bị, cấu hình khóa riêng vào firmware và nhập mã hiển thị trên phần cứng để kích hoạt.</p>
+        <div class="eyebrow">THIẾT BỊ THẬT · TÙY CHỌN</div><h1>Thiết bị <em>ESP32.</em></h1><p class="lead">Chỉ cần thực hiện nếu có phần cứng ESP32. Đăng nhập Google tại mục Tài khoản, sau đó tạo thiết bị và nhập mã từ ESP32.</p>
         <div class="two-col">
           <article class="panel"><div class="panel-kicker">ĐĂNG KÝ THIẾT BỊ</div><h2>Thêm thiết bị mới</h2>
             <form id="create-device" autocomplete="off">
@@ -145,13 +129,13 @@
         <div class="panel"><h2>Trạng thái phát hành</h2><p>Bản phát hành firmware do quản trị viên cấu hình trên Render: <code>FIRMWARE_VERSION</code>, <code>FIRMWARE_BOARD</code>, <code>FIRMWARE_URL</code> và <code>FIRMWARE_SHA256</code>. Không có firmware được đặt sẵn, vì cần xác định đúng phần cứng và khóa ký.</p></div>
       </section>
       <section class="view" id="view-guide" hidden>
-        <div class="eyebrow">DEPLOYMENT / 005</div><h1>Triển khai <em>hệ thống.</em></h1>
+        <div class="eyebrow">QUẢN TRỊ · NÂNG CAO</div><h1>Triển khai <em>hệ thống.</em></h1>
         <div class="panel"><h2>Cloudflare Pages</h2><p>Kết nối GitHub repository, Root directory <code>esp32-cloud/frontend</code>, Build command <code>npm run build</code>, Output directory <code>dist</code>. Khai báo biến <code>PUBLIC_API_URL</code> và <code>PUBLIC_GOOGLE_CLIENT_ID</code> trong phần build environment.</p></div>
         <div class="panel"><h2>Render + PostgreSQL</h2><p>Triển khai backend theo file <code>render.yaml</code>. Cấu hình <code>GOOGLE_CLIENT_ID</code>, <code>ALLOWED_ORIGINS</code> bằng URL Cloudflare Pages chính xác; cung cấp <code>DATABASE_URL</code> từ Render Postgres. Chỉ công bố địa chỉ API, không công bố khóa bí mật.</p></div>
         <div class="panel"><h2>Google Cloud OAuth</h2><p>Tạo OAuth Client ID loại Web application, bổ sung origin Cloudflare Pages vào Authorized JavaScript origins, sau đó dùng cùng Client ID cho frontend và Render. Không yêu cầu scope Gmail.</p></div>
         <div class="panel"><h2>XiaoZhi & Go backend hiện có</h2><p>Mã nguồn Go gốc của repository vẫn hoạt động độc lập. Backend Node quản lý thiết bị và xác thực Google; cấu hình giao thức XiaoZhi nằm trong stack Go hoặc gateway BilaBot. Việc phân tách tránh phá vỡ tuyến âm thanh hiện tại.</p></div>
       </section>
-      <footer>TRÌNH DUYỆT / ESP32 AI CLOUD <span>MIT · LONG NGO · 2026</span></footer>
+      <footer>BILABOT AI / ESP32 CLOUD <span>MIT · LONG NGO · 2026</span></footer>
     </div>
   </main>
 </div>
