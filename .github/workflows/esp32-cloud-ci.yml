@@ -28,6 +28,9 @@ jobs:
           node --check esp32-cloud/backend/server.mjs
           node --check esp32-cloud/backend/lib.mjs
           node --check esp32-cloud/backend/lib.test.mjs
+      - name: Install backend dependencies
+        working-directory: esp32-cloud/backend
+        run: npm install --omit=dev --no-audit --no-fund
       - name: Run backend unit tests
         working-directory: esp32-cloud/backend
         run: npm test
