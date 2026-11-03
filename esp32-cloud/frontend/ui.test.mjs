@@ -29,7 +29,7 @@ test('all UI script entrypoints have their required controls',()=>{
 test('primary UI has no mock AI chat reply and keeps real engine boundary',()=>{
   assert.match(html,/src="https:\/\/xulytiengviet\.github\.io\/Bilabot\/"/);
   assert.match(html,/trạng thái kết nối được hiển thị trong ứng dụng BilaBot/);
-  assert.match(html,/dữ liệu/i,{message:'all device sections remain present'});
+  assert.match(html,/id="view-devices"/);
   assert.match(style,/Chat-first 2026/);
   assert.match(html,/id="google-button"/);
   assert.match(html,/id="claim-device"/);
