@@ -23,7 +23,7 @@ const db = DATABASE_URL ? new pg.Pool({
   connectionString: DATABASE_URL,
   max: 10, idleTimeoutMillis: 30000,
   ssl: process.env.PGSSL === 'true' ? { rejectUnauthorized: true } : undefined
-});
+}) : null;
 
 async function init() {
   await db.query(`CREATE TABLE IF NOT EXISTS cloud_devices (
