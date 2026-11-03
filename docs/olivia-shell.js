@@ -31,7 +31,37 @@
     const frame = document.getElementById('olivia-ai-frame');
     if (frame) frame.src = frame.src;
   });
+  // A compact, optional guide: open on desktop, collapsed by default on phones.
+  // Store only the view preference; never persist Google or XiaoZhi tokens.
+  const layout = document.querySelector('#view-chat .chat-layout');
+  const guide = document.getElementById('quick-guide');
+  const guideToggle = document.getElementById('guide-toggle');
+  const guideClose = document.getElementById('guide-close');
+  const guideStorageKey = 'trinhduyet_guide_v2';
+  let savedGuide = null;
+  try { savedGuide = localStorage.getItem(guideStorageKey); } catch {}
+  const smallScreen = window.matchMedia('(max-width:760px)').matches;
+  let guideVisible = savedGuide === 'show' ? true :
+    savedGuide === 'hide' ? false : !smallScreen;
+  function setGuideVisible(visible, jump = false) {
+    guideVisible = !!visible;
+    layout?.classList.toggle('guide-collapsed', !guideVisible);
+    if (guideToggle) {
+      guideToggle.textContent = guideVisible ? 'Ẩn hướng dẫn' : 'Hướng dẫn 3 bước';
+      guideToggle.setAttribute('aria-expanded', String(guideVisible));
+    }
+    if (guide) guide.setAttribute('aria-hidden', String(!guideVisible));
+    try { localStorage.setItem(guideStorageKey, guideVisible ? 'show' : 'hide'); } catch {}
+    if (guideVisible && jump && smallScreen) {
+      guide?.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+  setGuideVisible(guideVisible);
+  guideToggle?.addEventListener('click', () => setGuideVisible(!guideVisible, true));
+  guideClose?.addEventListener('click', () => setGuideVisible(false));
+
   document.getElementById('focus-assistant')?.addEventListener('click', () => {
+    setGuideVisible(false);
     const frame = document.getElementById('olivia-ai-frame');
     frame?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     frame?.focus();
