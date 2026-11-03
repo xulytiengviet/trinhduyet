@@ -3,6 +3,7 @@ services:
   - type: web
     name: trinhduyet-esp32-cloud-api
     runtime: node
+    region: singapore
     rootDir: esp32-cloud/backend
     buildCommand: npm install --omit=dev
     startCommand: npm start
@@ -28,5 +29,7 @@ services:
         value: ""
 databases:
   - name: trinhduyet-esp32-pg
+    region: singapore
+    ipAllowList: []
     databaseName: esp32cloud
     user: esp32cloud
