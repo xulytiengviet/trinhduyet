@@ -15,12 +15,11 @@ const FIRMWARE = {
   sha256: process.env.FIRMWARE_SHA256 || '',
   board: process.env.FIRMWARE_BOARD || ''
 };
-if (!GOOGLE_CLIENT_ID || !DATABASE_URL || !ALLOWED_ORIGINS) {
-  console.error('Missing GOOGLE_CLIENT_ID, DATABASE_URL or ALLOWED_ORIGINS');
-  process.exit(1);
-}
-const oauth = new OAuth2Client(GOOGLE_CLIENT_ID);
-const db = new pg.Pool({
+const missingConfig = ['GOOGLE_CLIENT_ID','DATABASE_URL','ALLOWED_ORIGINS']
+  .filter(name => !process.env[name]);
+const configured = missingConfig.length === 0;
+const oauth = GOOGLE_CLIENT_ID ? new OAuth2Client(GOOGLE_CLIENT_ID) : null;
+const db = DATABASE_URL ? new pg.Pool({
   connectionString: DATABASE_URL,
   max: 10, idleTimeoutMillis: 30000,
   ssl: process.env.PGSSL === 'true' ? { rejectUnauthorized: true } : undefined
@@ -107,9 +106,14 @@ async function handler(req, res) {
     if (req.method === 'OPTIONS') { res.writeHead(204,headers); res.end(); return; }
     const {path,params} = pathInfo(req);
     if (req.method === 'GET' && path === '/api/health') {
+      if (!configured) return answer(200,{status:'setup_required',
+        service:'trinhduyet-esp32-cloud',version:'0.1.0',
+        missing: missingConfig});
       await db.query('SELECT 1');
       return answer(200,{status:'ok',service:'trinhduyet-esp32-cloud',version:'0.1.0'});
     }
+    if (!configured) throw new ApiError(503,
+      'Backend đang chờ cấu hình OAuth, CORS và PostgreSQL trên Render');
     if (req.method === 'GET' && path === '/api/me') {
       const u=await googleUser(req);
       return answer(200,{user:u});
@@ -194,6 +198,7 @@ async function handler(req, res) {
     if (!res.headersSent) answer(status,{error:status===500?'Lỗi máy chủ':e.message});
   }
 }
-init().then(()=>{
-  http.createServer(handler).listen(PORT,'0.0.0.0',()=>console.log('ESP32 Cloud listening on '+PORT));
+(configured ? init() : Promise.resolve()).then(()=>{
+  http.createServer(handler).listen(PORT,'0.0.0.0',()=>console.log(
+    'ESP32 Cloud listening on '+PORT+'; setup='+(!configured)));
 }).catch(e=>{console.error('Database initialization failed',e);process.exit(1)});
