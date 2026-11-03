@@ -1,22 +1,24 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090c12">
   <meta name="description" content="Trình Duyệt ESP32 AI Cloud – thiết bị thật, thiết bị ảo, đăng nhập Google và OTA">
-  <title>Trình Duyệt ESP32 AI Cloud</title>
+  <title>BilaBot AI · Trình Duyệt ESP32 Cloud</title>
   <link rel="stylesheet" href="./style.css">
   <script defer src="https://accounts.google.com/gsi/client"></script>
   <script defer src="./config.js"></script>
   <script defer src="./app.js"></script>
+  <script defer src="./olivia-shell.js"></script>
 </head>
 <body>
 <div class="shell">
   <aside class="sidebar">
-    <div class="brand"><span class="brand-logo">T<span class="lite">/</span>D</span><div><b>TRÌNH DUYỆT</b><small>ESP32 AI CLOUD · 0.1.0</small></div></div>
-    <div class="side-caption">BẢNG ĐIỀU KHIỂN</div>
+    <div class="brand"><span class="brand-logo">✦</span><div><b>BILABOT AI</b><small>TRÌNH DUYỆT ESP32 CLOUD</small></div><button type="button" class="theme-toggle" id="theme-switch" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối">☾</button></div>
+    <div class="side-caption">KHÔNG GIAN TRỢ LÝ</div>
     <nav id="nav">
+      <button type="button" class="nav-item active" data-view="chat"><span>◉</span> Trò chuyện AI</button>
       <button type="button" class="nav-item active" data-view="overview"><span>◫</span> Tổng quan</button>
       <button type="button" class="nav-item" data-view="devices"><span>▣</span> Thiết bị ESP32</button>
       <button type="button" class="nav-item" data-view="virtual"><span>◎</span> ESP32 ảo / Olivia</button>
@@ -31,10 +33,66 @@
   </aside>
   <main class="main">
     <header class="topbar">
-      <div class="breadcrumb">HỆ THỐNG <span>/</span> <b id="view-name">TỔNG QUAN</b></div>
-      <div class="topright"><span class="live-chip"><span class="status-dot white"></span> WEB CONSOLE</span><span id="profile" class="profile">Chưa đăng nhập</span></div>
+      <div class="breadcrumb">BILABOT / ESP32 <span>/</span> <b id="view-name">TỔNG QUAN</b></div>
+      <div class="topright"><span class="live-chip"><span class="status-dot white"></span> XIAOZHI AI STUDIO</span><span id="profile" class="profile">Chưa đăng nhập</span></div>
     </header>
     <div class="content">
+<section class="view" id="view-chat" hidden>
+  <div class="olivia-workspace">
+    <aside class="olivia-contacts" aria-label="Trợ lý và thiết bị">
+      <div class="olivia-contacts-header">
+        <span class="tiny-label">HỘP THOẠI</span>
+        <h2>Trợ lý AI <span class="assistant-count">02</span></h2>
+        <p>Thiết bị ảo và ESP32 thật</p>
+      </div>
+      <div class="assistant-list">
+        <button class="assistant-entry selected" type="button" id="assistant-bilabot">
+          <span class="assistant-pic">✦</span>
+          <span class="assistant-entry-main"><strong>BilaBot · XiaoZhi</strong><small>Giọng nói · Hình ảnh · MCP</small></span>
+          <span class="assistant-mini-dot"></span>
+        </button>
+        <button class="assistant-entry" type="button" data-view="devices" id="assistant-esp32">
+          <span class="assistant-pic physical">▣</span>
+          <span class="assistant-entry-main"><strong>ESP32 của tôi</strong><small>Quản lý qua tài khoản Google</small></span>
+        </button>
+      </div>
+      <div class="olivia-contacts-help">
+        <div class="mini-orb">◎</div>
+        <strong>Trình duyệt thành ESP32</strong>
+        <p>Trải nghiệm AI mà không cần phần cứng. Mỗi phiên trợ lý được ghép nối riêng tại XiaoZhi.</p>
+        <a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer">Lấy mã kích hoạt XiaoZhi <span>↗</span></a>
+      </div>
+      <div class="olivia-contacts-bottom">
+        <span class="assist-dot"></span> Kết nối AI phụ thuộc gateway BilaBot
+      </div>
+    </aside>
+    <div class="olivia-chat">
+      <header class="olivia-chat-header">
+        <div class="chat-person">
+          <span class="chat-avatar">✦</span>
+          <div><strong>BilaBot AI</strong><small>Trợ lý giọng nói · kế thừa Olivia AI</small></div>
+        </div>
+        <div class="chat-actions">
+          <a title="Kết nối trên trang đầy đủ" href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer" class="chat-action">↗ <span>Mở cửa sổ riêng</span></a>
+          <a title="Lấy mã kích hoạt" href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer" class="chat-action">⌘ <span>Mã XiaoZhi</span></a>
+        </div>
+      </header>
+      <div class="olivia-chat-intro" id="olivia-intro">
+        <div class="big-orb"><div class="orb-eye">✦</div></div>
+        <h2>Xin chào! Tôi là BilaBot.</h2>
+        <p>Không gian trò chuyện AI theo phong cách Olivia. Nhắn tin, nói chuyện bằng micro, gửi ảnh và ghép nối trợ lý qua XiaoZhi trong cửa sổ bên dưới.</p>
+        <div class="intro-actions"><a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer" class="button">Lấy mã OTA XiaoZhi ↗</a><button type="button" class="button outline" id="hide-ai-intro">Ẩn giới thiệu</button></div>
+      </div>
+      <div class="embed-disclaimer">
+        <span class="embed-pill">BILABOT / OLIVIA ENGINE</span>
+        <span>Trợ lý hoạt động qua trang BilaBot; quyền micro và camera do trình duyệt cấp</span>
+        <button type="button" id="reload-ai-frame" title="Tải lại trợ lý">↻</button>
+      </div>
+      <iframe class="olivia-ai-frame" id="olivia-ai-frame" src="https://xulytiengviet.github.io/Bilabot/" title="BilaBot – Trợ lý XiaoZhi tiếng Việt" loading="eager" allow="microphone; camera" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="frame-footer">Nếu khung hội thoại không hoạt động do chính sách nhúng hoặc gateway chưa sẵn sàng: <a href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer">mở BilaBot trực tiếp ↗</a></div>
+    </div>
+  </div>
+</section>
       <div class="announcement"><span class="new-tag">NÂNG CẤP</span> Kết nối phần cứng ESP32 thật với giao diện AI ảo. Mã kích hoạt của hệ thống này khác với mã XiaoZhi.</div>
       <section class="view" id="view-overview">
         <div class="eyebrow">CONTROL CENTER / 001</div><h1>Điều khiển ESP32.<br><em>Từ trình duyệt.</em></h1>
