@@ -1,10 +1,23 @@
-# Trình Duyệt — ESP32 AI Cloud (phần mở rộng)
+# Trình Duyệt — ESP32 ảo · Mở → Ghép → Trò chuyện
 
-> **Tính năng mới (nhánh ESP32 Cloud):** giao diện Cloudflare Pages tiếng Việt, Google Identity Services, backend Node/PostgreSQL trên Render, ghép nối ESP32 bằng mã 6 chữ số, theo dõi thiết bị, và firmware OTA HTTPS. Trình duyệt ESP32 ảo kế thừa BilaBot/Olivia AI. **Đây là tính năng bổ sung; lõi XiaoZhi Go bên dưới không bị thay thế.**
+**Trang sử dụng:** https://xulytiengviet.github.io/trinhduyet/
 
-**[Mã nguồn, cấu hình triển khai và tài liệu ESP32 AI Cloud](esp32-cloud/README.md)** · [Frontend](esp32-cloud/frontend/) · [Backend](esp32-cloud/backend/) · [Firmware ESP-IDF](esp32-cloud/firmware/).
+Trình Duyệt biến tab trình duyệt thành **một ESP32 ảo giao tiếp với XiaoZhi**, không cần phần cứng. Phiên bản web chạy client **Olivia AI/BilaBot** ngay trong chính repository, bao gồm cấp Device-ID/Client-ID, OTA, ghép mã 6 số do XiaoZhi cấp, WebSocket và âm thanh Opus.
 
-**Trạng thái:** mã nguồn và quy trình CI đã được cung cấp; cần cấu hình Google OAuth, triển khai Cloudflare/Render, cấp phát khóa cho ESP32 và kiểm thử thực tế. Mã 6 chữ số của ESP32 Cloud không phải mã kích hoạt XiaoZhi.
+1. **Mở** trang để khởi tạo ESP32 ảo và danh tính thiết bị cục bộ.
+2. **Ghép** bằng nút `Lấy mã và ghép thiết bị`; nhập mã trên https://xiaozhi.me/console/agents. Không báo đã ghép khi chưa được XiaoZhi xác nhận.
+3. **Trò chuyện** bằng văn bản hoặc micro khi WebSocket XiaoZhi kết nối thành công.
+
+**Không yêu cầu cài app, đăng nhập Google vào Trình Duyệt hay mua ESP32.** Người dùng có thể cần tài khoản XiaoZhi cho lần ghép đầu. Gateway Hono/Cloudflare phải thực sự hoạt động; GitHub Pages không hỗ trợ proxy OTA/WebSocket tự thân. Nếu gateway lỗi, hệ thống sẽ báo lỗi thực, không sinh mã mô phỏng.
+
+**Cấu trúc:**
+- `docs/index.html`, `docs/launcher.js`, `docs/launcher.css`: giao diện ba bước; `index.html` là lối vào nếu GitHub Pages xuất bản từ root.
+- `docs/device/`: lõi máy khách ESP32 ảo kế thừa BilaBot/Olivia (MIT), có cầu nối trạng thái cùng origin và vùng lưu trữ cục bộ riêng của Trình Duyệt.
+- `docs/cloud.html`: bảng điều khiển bổ sung cho thiết bị ESP32 vật lý; Google OAuth / Render PostgreSQL phục vụ chức năng này, **không** thay mã OTA XiaoZhi.
+- `esp32-cloud/`: backend quản lý ESP32 thật và mã nguồn tham chiếu ESP-IDF.
+- Lõi Go XiaoZhi ban đầu vẫn được giữ lại ở các thư mục nguồn phía dưới.
+
+**Nguồn kế thừa:** [Olivia AI](https://github.com/roalfb/olivia-ai) · [BilaBot](https://github.com/xulytiengviet/Bilabot) · [Giấy phép MIT và chú giải vận hành](docs/device/README.md).
 
 ---
 

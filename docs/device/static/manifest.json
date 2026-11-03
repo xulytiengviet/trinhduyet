@@ -1,13 +1,13 @@
 {
-  "name": "BilaBot – Trợ lý XiaoZhi Web AI",
-  "short_name": "BilaBot",
-  "description": "Trợ lý AI tiếng Việt: Google Identity Services, ghép nối XiaoZhi OTA, WebSocket, Opus và MCP",
+  "name": "Trình Duyệt — Thiết bị ESP32 ảo",
+  "short_name": "ESP32 Web",
+  "description": "Mở → ghép mã XiaoZhi → trò chuyện bằng giọng nói và văn bản trên thiết bị ESP32 ảo trong trình duyệt.",
   "lang": "vi",
   "start_url": "../",
   "scope": "../",
   "display": "standalone",
-  "background_color": "#06121e",
-  "theme_color": "#102334",
+  "background_color": "#f8f7fc",
+  "theme_color": "#6658df",
   "icons": [
     {
       "src": "./logo/favicon.svg",
