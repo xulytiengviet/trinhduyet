@@ -1,0 +1,104 @@
+/* BilaBot Direct Setup — show the original Olivia-style assistant UI first.
+   The existing OTA wizard becomes an in-app drawer, not a separate landing. */
+body.bilabot-open #app{display:flex}
+html body.bilabot-open:not(.bb-setup-open) #bilabot-gate{display:none!important}
+html body.bilabot-open.bb-setup-open #bilabot-gate{
+  display:block!important;position:fixed!important;inset:0;z-index:9700;
+  overflow-x:hidden;overflow-y:auto;max-height:100dvh;
+  background:rgba(5,12,25,.73)!important;backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);color:#edf3ff;
+}
+body.bb-setup-open{overflow:hidden}
+body.bb-setup-open #bilabot-gate .bb-atmosphere,
+body.bb-setup-open #bilabot-gate .bb-nav,
+body.bb-setup-open #bilabot-gate .bb-stage-title,
+body.bb-setup-open #bilabot-gate .bb-preview,
+body.bb-setup-open #bilabot-gate .bb-highlights,
+body.bb-setup-open #bilabot-gate .bb-footer{display:none!important}
+body.bb-setup-open #bilabot-gate .bb-studio{
+  display:block!important;box-sizing:border-box;max-width:none;
+  width:min(100%,530px);min-height:100dvh;margin:0 0 0 auto;padding:0!important;
+}
+body.bb-setup-open #bilabot-gate .bb-workspace{
+  display:block!important;max-width:none;margin:0!important;padding:0!important;
+}
+body.bb-setup-open #bilabot-gate .bb-signin{
+  display:block!important;min-height:100dvh;margin:0!important;padding:18px 28px 34px!important;
+  border-radius:0;box-shadow:-20px 0 65px rgba(0,0,0,.28);
+  background:linear-gradient(155deg,#1c283e,#121c2e)!important;
+  border:0;border-left:1px solid rgba(180,203,243,.19);
+}
+#bilabot-gate .bb-direct-drawer-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;margin:0 0 22px;padding:4px 0 16px;
+  border-bottom:1px solid rgba(176,196,236,.18);
+  color:#b1d9df;font:800 10px/1.3 Inter,system-ui,sans-serif;letter-spacing:.12em;
+}
+#bilabot-gate .bb-direct-drawer-head span{display:inline-flex;align-items:center;gap:10px}
+#bilabot-gate .bb-direct-drawer-head span i{color:#9c94fb;font-size:14px}
+#bilabot-gate .bb-direct-drawer-head button{
+  border:1px solid rgba(189,206,240,.29);border-radius:10px;
+  width:34px;height:34px;display:grid;place-items:center;
+  background:#28374c;color:#e8f0ff;cursor:pointer;
+}
+#bilabot-gate .bb-direct-drawer-head button:hover{background:#3b4d65}
+#bilabot-gate .bb-direct-assistant-tools{display:flex;justify-content:center;margin:14px 0 4px}
+#bilabot-gate .bb-direct-assistant-tools button{
+  border:1px solid rgba(177,203,233,.28);background:#21354e;
+  border-radius:10px;padding:12px 15px;color:#dcefff;
+  font-size:11px;font-weight:740;display:inline-flex;align-items:center;
+  gap:9px;width:100%;justify-content:center;
+}
+#bilabot-gate .bb-direct-assistant-tools button:hover{background:#344d67}
+#app .bb-direct-onboarding{
+  margin:10px 12px 9px;padding:13px;border:1px solid rgba(110,180,194,.32);
+  background:linear-gradient(145deg,rgba(83,114,192,.17),rgba(71,184,165,.12));
+  border-radius:13px;color:var(--text-primary);box-shadow:none;
+}
+#app .bb-direct-onboarding .bilabot-login-label{
+  color:var(--accent,#26ac96);font-weight:800;letter-spacing:.09em;font-size:10px;
+}
+#app .bb-direct-onboarding .bb-onboarding-status{
+  margin:8px 0 11px;color:var(--text-secondary,#718299);
+  line-height:1.6;font-size:11px;
+}
+#app .bb-sidebar-setup-cta{
+  display:flex;align-items:center;gap:9px;width:100%;
+  padding:12px 10px;border:0;border-radius:10px;
+  background:linear-gradient(100deg,#7979de,#38b9b1);color:white;
+  font:800 11px/1.4 Inter,system-ui,sans-serif;cursor:pointer;
+}
+#app .bb-sidebar-setup-cta:hover{filter:brightness(1.09)}
+#app .bb-sidebar-setup-cta i:last-child{margin-left:auto}
+#app .bb-sidebar-xiaozhi{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:10px;font-weight:650;margin-top:12px;color:var(--text-secondary,#73869e);
+  text-decoration:none;
+}
+#app .bb-sidebar-xiaozhi:hover{color:var(--accent,#1cb198)}
+#app .bb-header-setup-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  width:auto;padding:0 11px;border:1px solid var(--border,rgba(120,145,171,.22));
+  border-radius:10px;color:var(--text-primary);background:var(--bg-input,rgba(140,160,190,.08));
+}
+#app .bb-header-setup-btn span{font-size:11px;font-weight:700}
+#app .bb-header-setup-btn:hover{border-color:#4dbaa9}
+#app .bb-identity{display:flex;align-items:center;justify-content:space-between;
+  gap:10px;font-size:11px;line-height:1.4;margin:3px 12px 9px;padding:7px 10px;
+  border:1px solid var(--border,#ccd9e1);border-radius:9px;background:var(--bg-secondary,#fff)}
+#app .bb-identity a{color:var(--text-secondary,#718299)}
+#app .bb-identity button{background:none;border:0;color:var(--accent,#20a391);
+  cursor:pointer;font-weight:700;font-size:11px}
+@media(max-width:768px){
+  body.bb-setup-open #bilabot-gate .bb-studio{width:100%;margin:0}
+  body.bb-setup-open #bilabot-gate .bb-signin{
+    width:100%;padding:17px 18px 26px!important;min-height:100dvh;
+    border:0;box-shadow:none;
+  }
+  #app .bb-header-setup-btn{width:38px;flex:none;padding:0}
+  #app .bb-header-setup-btn span{display:none}
+  #app .bb-direct-onboarding{margin:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  #bilabot-gate.bb-gate *,#app .bb-sidebar-setup-cta{animation:none!important;transition:none!important}
+}

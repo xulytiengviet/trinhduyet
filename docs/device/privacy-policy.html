@@ -1,0 +1,11 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quyền riêng tư · BilaBot</title><style>body{font:16px/1.7 system-ui;max-width:800px;margin:45px auto;padding:0 22px;color:#183a40;background:#f8fcfc}h1,h2{line-height:1.25}a{color:#078873}</style></head>
+<body><a href="./">← BilaBot</a><h1>Chính sách quyền riêng tư BilaBot</h1>
+<p><strong>Cập nhật: 25/09/2026.</strong> BilaBot do Long Ngo/xulytiengviet phát triển dựa trên Olivia AI (MIT), độc lập với XiaoZhi, Google và Cloudflare.</p>
+<h2>Đăng nhập và ghép nối XiaoZhi</h2>
+<p>BilaBot không yêu cầu đăng nhập Google riêng. Bạn đăng nhập trực tiếp tại <a href="https://xiaozhi.me/console/agents">bảng điều khiển XiaoZhi chính thức</a>. BilaBot không đọc cookie, mật khẩu hoặc access token web từ XiaoZhi. Thiết bị ESP32 ảo có Device-ID và Client-ID cục bộ; mã kích hoạt chỉ được hiển thị nếu OTA XiaoZhi thực sự trả về. Bạn nhập mã tại XiaoZhi để liên kết AI Agent.</p>
+<h2>Giao tiếp và dữ liệu</h2>
+<p>Cloudflare Pages tích hợp Hono để chuyển tiếp OTA, phiên WebSocket và ảnh được bạn cho phép. Gateway bảo vệ phiên bằng Turnstile, mã HMAC ngắn hạn và vé WebSocket AES-GCM; không có Google OAuth riêng trong BilaBot. Âm thanh Opus, dữ liệu STT/TTS và lệnh MCP đi đến XiaoZhi khi bạn trò chuyện. Gateway không chủ đích lưu nội dung hội thoại lâu dài, nhưng dịch vụ hạ tầng có chính sách và nhật ký riêng.</p>
+<h2>Dữ liệu lưu trên trình duyệt</h2>
+<p>Hồ sơ trợ lý, token thiết bị đã ghép nối, hội thoại và cài đặt có thể lưu trong localStorage; phiên chuyển tiếp có thể lưu trong sessionStorage tới khi hết hạn. Xóa dữ liệu website để xóa dữ liệu cục bộ, đồng thời hủy ghép nối trong tài khoản XiaoZhi nếu cần thu hồi thiết bị. Tránh sử dụng máy công cộng. Cloudflare Turnstile có thể xử lý IP và tín hiệu trình duyệt để chống lạm dụng.</p>
+<h2>Liên hệ</h2><p>Báo lỗi bảo mật qua <a href="https://github.com/xulytiengviet/Bilabot/issues">GitHub Issues</a>; không đăng công khai token, cookie hay mã kích hoạt còn hạn.</p></body></html>

@@ -1,0 +1,9 @@
+/* Native BilaBot runtime, adapted to live inside TrinhDuyet.
+   The real OTA drawer, chat and mic controls remain functional. */
+:root{--primary:#4c64db;--primary-dark:#364fbf;--primary-light:#eef1ff}
+html,body{scrollbar-width:thin}
+body.bilabot-open{background:#f6f7fc}
+#app{min-height:100dvh}
+#bilabot-gate{z-index:9998}
+.bb-direct-drawer-head{position:sticky;top:0;z-index:1}
+@media(max-width:700px){.app-container{height:100dvh}}

@@ -1,0 +1,247 @@
+/* BilaBot Monochrome Dashboard · Vietnamese · 2026
+   The same native Olivia inputs, settings IDs, OTA and backup actions are retained. */
+#settingsPanel.bb-mono-dashboard{
+  --db-black:#111111;--db-ink:#1b1b1b;--db-muted:#696969;--db-border:#e1e1e1;
+  --db-surface:#ffffff;--db-soft:#f5f5f5;
+  position:absolute;inset:0;width:100%;height:100%;max-width:none;min-width:0;
+  z-index:1300;display:grid;grid-template-columns:244px minmax(0,1fr);grid-template-rows:75px minmax(0,1fr);
+  color:var(--db-ink);background:var(--db-surface);border:0;box-shadow:0 15px 50px #0002;
+  transform:translateX(105%);transition:transform .24s ease;color-scheme:light;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif
+}
+#settingsPanel.bb-mono-dashboard.open{transform:translateX(0)}
+#settingsPanel.bb-mono-dashboard *{box-sizing:border-box}
+#settingsPanel .bb-dashboard-header{
+  grid-column:1/-1;grid-row:1;min-width:0;padding:13px clamp(18px,3vw,38px);
+  background:#fff;border-bottom:1px solid var(--db-border);display:flex;align-items:center;justify-content:space-between;gap:16px
+}
+#settingsPanel .bb-db-brand{display:flex;gap:13px;align-items:center;min-width:0}
+#settingsPanel .bb-db-brand>span:last-child{min-width:0}
+#settingsPanel .bb-db-mark{width:43px;height:43px;flex:none;background:#171717;color:#fff;
+  border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:850;letter-spacing:-.05em}
+#settingsPanel .bb-db-brand small{display:block;color:#888;font-size:9px;font-weight:850;letter-spacing:.16em;margin-bottom:4px}
+#settingsPanel .bb-db-brand h2{color:#111;font-size:19px;letter-spacing:-.045em;font-weight:800;line-height:1.15;margin:0}
+#settingsPanel .bb-db-header-right{display:flex;align-items:center;gap:16px}
+#settingsPanel #bb-db-top-state{font-size:11px;color:#5d5d5d;border:1px solid #e0e0e0;background:#fafafa;
+  border-radius:999px;padding:8px 11px;max-width:230px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#settingsPanel #closeSettingsBtn{width:38px;height:38px;background:#f6f6f6;border:1px solid #e3e3e3;
+  border-radius:11px;flex:none;color:#333;font-size:15px;cursor:pointer}
+#settingsPanel #closeSettingsBtn:hover{background:#1a1a1a;color:#fff}
+#settingsPanel .bb-db-nav{
+  grid-column:1;grid-row:2;display:flex;flex-direction:column;gap:4px;
+  min-height:0;overflow-y:auto;background:#171717;color:#e7e7e7;padding:24px 13px 20px
+}
+#settingsPanel .bb-db-nav-heading{font-size:9px;letter-spacing:.18em;font-weight:850;color:#858585;
+  padding:10px 13px 13px}
+#settingsPanel .bb-db-nav-secondary{border-top:1px solid #353535;margin-top:13px;padding-top:23px}
+#settingsPanel .bb-db-tab{display:flex;gap:11px;align-items:center;text-align:left;width:100%;min-height:43px;
+  padding:11px 13px;border-radius:10px;border:1px solid transparent;background:transparent;color:#aaa;
+  font:650 12px/1.4 Inter,system-ui,sans-serif;cursor:pointer;transition:background .15s,color .15s}
+#settingsPanel .bb-db-tab i{width:17px;text-align:center;font-size:13px;color:#858585}
+#settingsPanel .bb-db-tab:hover{background:#292929;color:#fff}
+#settingsPanel .bb-db-tab.active{background:#f5f5f5;border-color:#e6e6e6;color:#151515;font-weight:800}
+#settingsPanel .bb-db-tab.active i{color:#151515}
+#settingsPanel .bb-db-nav-bottom{margin-top:auto;border-top:1px solid #353535;padding:17px 12px 3px;
+  font-size:10px;color:#989898;line-height:1.5}
+#settingsPanel .bb-db-body{
+  grid-column:2;grid-row:2;background:#fbfbfb;min-height:0;overflow:auto;padding:clamp(20px,3.5vw,48px);
+  display:block;scrollbar-color:#c7c7c7 transparent;overscroll-behavior:contain
+}
+#settingsPanel .bb-dash-pane{display:none;max-width:1000px;margin:0 auto 90px;color:#1a1a1a}
+#settingsPanel[data-pane="overview"] .bb-dash-pane[data-pane="overview"],
+#settingsPanel[data-pane="assistant"] .bb-dash-pane[data-pane="assistant"],
+#settingsPanel[data-pane="connection"] .bb-dash-pane[data-pane="connection"],
+#settingsPanel[data-pane="device"] .bb-dash-pane[data-pane="device"],
+#settingsPanel[data-pane="protocol"] .bb-dash-pane[data-pane="protocol"],
+#settingsPanel[data-pane="audio"] .bb-dash-pane[data-pane="audio"],
+#settingsPanel[data-pane="data"] .bb-dash-pane[data-pane="data"]{display:block}
+#settingsPanel .bb-db-eyebrow{display:inline-flex;color:#6e6e6e;font-size:10px;font-weight:850;letter-spacing:.18em;margin:0 0 13px}
+#settingsPanel .bb-dash-pane>h3{color:#141414;font-size:clamp(23px,2.7vw,32px);line-height:1.2;
+  font-weight:850;letter-spacing:-.055em;text-transform:none;border:0;padding:0;margin:0 0 12px}
+#settingsPanel .bb-db-intro{font-size:13px;line-height:1.85;color:#666;max-width:730px;margin:0 0 26px}
+#settingsPanel .bb-db-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:21px 0 18px}
+#settingsPanel .bb-db-metrics article{background:#fff;border:1px solid #e3e3e3;border-radius:14px;
+  padding:20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+#settingsPanel .bb-db-metrics small{font-size:9px;color:#818181;font-weight:850;letter-spacing:.13em}
+#settingsPanel .bb-db-metrics strong{font-size:clamp(15px,1.8vw,20px);color:#151515;font-weight:850;
+  letter-spacing:-.05em;line-height:1.3;overflow-wrap:anywhere}
+#settingsPanel .bb-db-metrics article>span{color:#737373;font-size:11px;overflow-wrap:anywhere;line-height:1.5}
+#settingsPanel .bb-db-card{background:#fff;border:1px solid #e3e3e3;border-radius:15px;
+  padding:clamp(16px,2.5vw,26px);margin:0 0 17px}
+#settingsPanel .bb-db-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#settingsPanel .bb-db-card-head small{font-size:9px;letter-spacing:.13em;font-weight:850;color:#848484}
+#settingsPanel .bb-db-card h4{color:#151515;font-size:17px;letter-spacing:-.04em;margin:6px 0 10px;font-weight:850}
+#settingsPanel .bb-db-card-head>i{font-size:19px;color:#777}
+#settingsPanel .bb-db-card p{font-size:12px;line-height:1.85;color:#676767;margin:9px 0 20px}
+#settingsPanel .bb-db-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+#settingsPanel .bb-db-primary,#settingsPanel .bb-db-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font:750 12px/1.4 Inter,system-ui,sans-serif;padding:12px 17px;border-radius:10px;
+  cursor:pointer;text-decoration:none;transition:background .15s;min-height:43px}
+#settingsPanel .bb-db-primary{background:#181818;color:#fff;border:1px solid #181818}
+#settingsPanel .bb-db-primary:hover:not(:disabled){background:#373737}
+#settingsPanel .bb-db-secondary{background:#fff;color:#242424;border:1px solid #dedede}
+#settingsPanel .bb-db-secondary:hover:not(:disabled){background:#f0f0f0}
+#settingsPanel button:disabled{opacity:.52;cursor:not-allowed}
+#settingsPanel .bb-db-sysinfo{margin-top:17px}
+#settingsPanel .bb-db-sysinfo>div{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  padding:13px 0;border-top:1px solid #ededed;font-size:12px}
+#settingsPanel .bb-db-sysinfo span{color:#787878}
+#settingsPanel .bb-db-sysinfo strong{color:#303030;text-align:right;font-weight:700}
+#settingsPanel .bb-db-gateway-form label{font-size:12px;font-weight:800;color:#242424;display:block;margin:19px 0 8px}
+#settingsPanel .bb-db-gateway-form :is(input,select){width:100%;padding:12px 13px;border:1px solid #d8d8d8;
+  background:#fff;color:#171717;font:500 13px/1.4 Inter,system-ui,sans-serif;border-radius:10px}
+#settingsPanel .bb-db-gateway-form input:focus,#settingsPanel .bb-db-gateway-form select:focus{border-color:#202020;outline:3px solid #e6e6e6}
+#settingsPanel .bb-db-gateway-form input:disabled{background:#f2f2f2;color:#777}
+#settingsPanel .bb-db-gateway-form>small{display:block;font-size:11px;color:#777;margin:8px 0;line-height:1.6}
+#settingsPanel #bb-db-gateway-indicator{font-size:10px;color:#555;background:#f4f4f4;border-radius:50px;
+  border:1px solid #e3e3e3;padding:7px 10px}
+#settingsPanel .bb-db-inline-status{font-size:11px!important;color:#5b5b5b!important;
+  margin:12px 0 0!important;overflow-wrap:anywhere;line-height:1.6}
+#settingsPanel .bb-db-inline-status[data-state="error"]{color:#222!important;font-weight:800}
+#settingsPanel .bb-db-validation{font-size:11px;color:#101010;padding:9px 12px;border-radius:8px;
+  background:#ededed;border:1px solid #aaa;width:100%}
+#settingsPanel .bb-db-body>.settings-section{margin-bottom:80px}
+#settingsPanel .bb-db-body .form-group{max-width:770px;margin:0 0 20px;padding:20px 23px;
+  background:#fff;border:1px solid #e5e5e5;border-radius:12px}
+#settingsPanel .bb-db-body .form-group>label{font-size:12px;color:#272727;font-weight:750;margin-bottom:10px}
+#settingsPanel .bb-db-body .form-group>small{color:#828282;font-size:11px;line-height:1.6;margin-top:9px}
+#settingsPanel .bb-db-body .form-group input[type="text"],
+#settingsPanel .bb-db-body .form-group input[type="password"],
+#settingsPanel .bb-db-body .form-group select,
+#settingsPanel .bb-db-body .form-group textarea{background:#fff;color:#151515;border:1px solid #d6d6d6;
+  border-radius:9px;font:500 13px Inter,system-ui,sans-serif;padding:12px;width:100%;box-shadow:none}
+#settingsPanel .bb-db-body .form-group :is(input,select,textarea):focus{border-color:#222;outline:3px solid #e8e8e8}
+#settingsPanel .bb-db-body .settings-avatar-section{display:flex;align-items:center;gap:19px;flex-wrap:wrap}
+#settingsPanel .bb-db-body .settings-avatar-actions{display:flex;flex-wrap:wrap;gap:9px}
+#settingsPanel .bb-db-body .pairing-status-display{border:1px solid #dadada;background:#f7f7f7;
+  border-radius:8px;color:#252525;padding:12px;font-size:12px}
+#settingsPanel .bb-db-body .checkbox-group label{display:flex;gap:13px;align-items:center;
+  font-size:13px;color:#202020;margin:0}
+#settingsPanel .bb-db-body input[type="checkbox"]{accent-color:#161616;width:17px;height:17px}
+#settingsPanel .bb-db-body .settings-connection-actions{display:flex;max-width:770px}
+#settingsPanel .bb-db-body .settings-connection-actions button{flex:1}
+#settingsPanel .bb-db-body :is(.btn-primary,.btn-secondary,.btn-danger){border-radius:9px;
+  font:750 12px Inter,system-ui,sans-serif;padding:12px 16px;min-height:42px;box-shadow:none}
+#settingsPanel .bb-db-body .btn-primary{background:#1b1b1b;color:white;border:1px solid #1b1b1b}
+#settingsPanel .bb-db-body .btn-secondary{background:white;color:#202020;border:1px solid #dadada}
+#settingsPanel .bb-db-body .btn-danger{color:#222;background:#fff;border:1px solid #949494}
+#settingsPanel .bb-db-save-actions{position:sticky;bottom:0;max-width:1000px;margin:0 auto;z-index:1;
+  padding:14px 0 5px;background:linear-gradient(transparent,#fbfbfb 20%);display:flex;flex-direction:row;flex-wrap:wrap;
+  border:0;gap:9px}
+#settingsPanel[data-pane="overview"] .bb-db-save-actions,#settingsPanel[data-pane="data"] .bb-db-save-actions{display:none}
+#settingsPanel .bb-db-save-actions :is(button){width:auto;min-width:160px}
+#settingsPanel #bb-db-backup-slot>.settings-section{margin:0}
+#settingsPanel #bb-db-backup-slot .form-group{border:1px solid #ededed}
+#settingsPanel #bb-db-backup-slot .backup-timestamp{color:#444;background:#f7f7f7;border:1px solid #dedede}
+#settingsPanel .bb-dash-pane[data-pane="data"] .bb-db-secondary{margin-top:4px}
+#settingsPanel :is(button,a,input,select):focus-visible{outline:3px solid #8a8a8a;outline-offset:3px}
+body.bb-mono-settings #globalSettingsPanel{display:none!important}
+@media(max-width:860px){
+ #settingsPanel.bb-mono-dashboard{grid-template-columns:195px minmax(0,1fr);grid-template-rows:68px minmax(0,1fr)}
+ #settingsPanel .bb-dashboard-header{padding:12px 18px}
+ #settingsPanel .bb-db-nav{padding:16px 9px}
+ #settingsPanel .bb-db-metrics{grid-template-columns:1fr}
+ #settingsPanel .bb-db-body{padding:27px 22px}
+}
+@media(max-width:600px){
+ #settingsPanel.bb-mono-dashboard{grid-template-columns:100%;grid-template-rows:66px 56px minmax(0,1fr);
+   z-index:1350;inset:0;height:100dvh}
+ #settingsPanel .bb-dashboard-header{grid-column:1;grid-row:1;padding:11px 14px}
+ #settingsPanel .bb-db-brand h2{font-size:15px}
+ #settingsPanel .bb-db-brand small{font-size:8px;letter-spacing:.07em}
+ #settingsPanel .bb-db-mark{width:35px;height:35px;font-size:16px;border-radius:10px}
+ #settingsPanel #bb-db-top-state{display:none}
+ #settingsPanel .bb-db-nav{grid-row:2;grid-column:1;padding:7px 11px;background:#151515;
+   overflow-x:auto;overflow-y:hidden;display:flex;flex-direction:row;gap:7px;align-items:center;scrollbar-width:none}
+ #settingsPanel .bb-db-nav::-webkit-scrollbar{display:none}
+ #settingsPanel .bb-db-nav-heading,#settingsPanel .bb-db-nav-bottom{display:none}
+ #settingsPanel .bb-db-tab{min-width:max-content;min-height:39px;padding:9px 11px;width:auto;white-space:nowrap;gap:7px;font-size:10px}
+ #settingsPanel .bb-db-tab i{font-size:11px;width:auto}
+ #settingsPanel .bb-db-body{grid-column:1;grid-row:3;padding:26px 15px 16px}
+ #settingsPanel .bb-dash-pane{margin-bottom:55px}
+ #settingsPanel .bb-db-metrics{grid-template-columns:1fr}
+ #settingsPanel .bb-db-card{padding:17px}
+ #settingsPanel .bb-db-save-actions{flex-direction:column}
+ #settingsPanel .bb-db-save-actions button{width:100%}
+ #settingsPanel .bb-db-body .form-group{padding:16px;margin-bottom:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ #settingsPanel.bb-mono-dashboard{transition:none!important}
+ #settingsPanel .bb-db-tab{transition:none!important}
+}
+
+/* Explicit access to the dashboard from both Olivia-style app surfaces. */
+#app .bb-sidebar-dashboard-cta{width:100%;min-height:40px;margin-top:8px;
+  display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #777;
+  border-radius:9px;background:#222;color:#fff;font:750 11px Inter,system-ui,sans-serif;cursor:pointer}
+#app .bb-sidebar-dashboard-cta:hover{background:#444}
+#app .bb-header-dashboard-btn{border:1px solid #7a7a7a;background:#222;color:#fff}
+#app .bb-header-dashboard-btn:hover{background:#404040}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-signin{
+  background:#f8f8f8!important;color:#1c1c1c;border-left:1px solid #d9d9d9;
+  box-shadow:-20px 0 70px #0004}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-signin :is(h2,h3,h4,p,.bb-step-heading strong){color:#212121}
+body.bb-mono-settings.bb-setup-open #bilabot-gate :is(.bb-setup-desc,.bb-step-content>p,.bb-step-label,#bb-code-hint){color:#727272}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-direct-drawer-head{color:#555;border-color:#dadada}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-direct-drawer-head span i{color:#151515}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-direct-drawer-head button{color:#111;background:#fff;border:1px solid #ddd}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-beta-tag,
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-step-label{background:#f0f0f0;color:#525252;border-color:#dfdfdf}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-flow{background:#fff;border:1px solid #ddd}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-flow li>span{background:#eee;border-color:#ccc;color:#555}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-flow li>small{color:#777}
+body.bb-mono-settings.bb-setup-open #bb-setup :is(.bb-flow li>span,.bb-step-badge-num){background:#ececec;border-color:#cfcfcf;color:#252525;box-shadow:none}
+body.bb-mono-settings.bb-setup-open #bb-setup[data-phase="code"] #bb-flow-console>span,
+body.bb-mono-settings.bb-setup-open #bb-setup[data-phase="paired"] .bb-flow li>span,
+body.bb-mono-settings.bb-setup-open #bb-setup[data-phase="connected"] .bb-flow li>span{background:#262626;color:#fff;border-color:#262626}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-pair-button{background:#1b1b1b;color:#fff;box-shadow:none}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-xiaozhi-button{background:#fff;color:#222!important;border-color:#cecece}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-code-preview{background:#fff!important;border:1px dashed #bebebe!important}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-code-preview[data-phase="code"]{border-color:#4b4b4b!important}
+body.bb-mono-settings.bb-setup-open #bilabot-gate #bb-code-value{color:#222!important}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-code-live{color:#777!important}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-code-live i{color:#444!important;box-shadow:none!important}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-pair-progress{color:#5f5f5f}
+body.bb-mono-settings.bb-setup-open #bilabot-gate :is(.bb-auth-footer,.bb-pair-tracker){border-color:#e3e3e3}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-connection{color:#444}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-state-dot{background:#454545;box-shadow:none}
+body.bb-mono-settings.bb-setup-open #bilabot-gate #bb-copy-code{background:#1b1b1b;color:#fff;border-color:#1b1b1b}
+body.bb-mono-settings.bb-setup-open #bilabot-gate #bb-open-pair-console{background:#fff;border-color:#bcbcbc;color:#222}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-selfconfig{background:#fff;border:1px solid #dedede}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-selfconfig summary{color:#333}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-selfconfig :is(input,select){background:#fff;border:1px solid #d2d2d2;color:#242424}
+body.bb-mono-settings.bb-setup-open #bilabot-gate #bb-health-check{background:#fff;border-color:#c3c3c3;color:#333}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-direct-assistant-tools button{background:#fff;border-color:#d1d1d1;color:#222}
+body.bb-mono-settings.bb-setup-open #bilabot-gate .bb-setup-guide{color:#333!important}
+@media(max-width:600px){
+ #app .bb-header-dashboard-btn,#app .bb-header-setup-btn{min-width:33px;max-width:37px}
+}
+
+/* Olivia-like end-user flow: three simple actions; infrastructure for site owners only. */
+#settingsPanel .bb-db-user-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  margin:18px 0 3px;gap:8px}
+#settingsPanel .bb-db-user-steps span{display:flex;align-items:center;gap:10px;
+  padding:13px 11px;border:1px solid #e8e8e8;border-radius:9px;color:#454545;
+  background:#fafafa;font-size:11px;font-weight:700;line-height:1.4}
+#settingsPanel .bb-db-user-steps b{width:23px;height:23px;display:grid;place-items:center;
+  background:#202020;color:#fff;flex:none;border-radius:7px;font-size:11px}
+#settingsPanel .bb-db-admin-setup{background:#f5f5f5;border:1px solid #dedede;
+  border-radius:12px;margin:20px 0;padding:0 16px 15px;color:#252525}
+#settingsPanel .bb-db-admin-setup>summary{display:flex;align-items:center;gap:9px;
+  list-style:none;cursor:pointer;min-height:49px;font-size:12px;font-weight:800}
+#settingsPanel .bb-db-admin-setup>summary::-webkit-details-marker{display:none}
+#settingsPanel .bb-db-admin-setup>summary i:last-child{margin-left:auto;transition:transform .16s}
+#settingsPanel .bb-db-admin-setup[open]>summary i:last-child{transform:rotate(180deg)}
+#settingsPanel .bb-db-admin-note{font-size:11px;line-height:1.7;color:#666;margin:0 0 13px}
+#settingsPanel .bb-db-admin-setup .bb-db-card{margin:0}
+#settingsPanel .bb-db-public-state{display:flex;align-items:center;gap:10px;
+  margin:14px 0 17px;padding:14px 16px;background:#fff;border:1px solid #dedede;
+  border-radius:11px;color:#555;font-size:12px;font-weight:650}
+#settingsPanel .bb-db-public-state::before{content:"";height:8px;width:8px;flex:none;
+  background:#888;border-radius:50%}
+#settingsPanel .bb-db-public-state[data-state="ready"]::before{background:#151515}
+#settingsPanel .bb-db-public-state[data-state="error"]{border-style:dashed}
+@media(max-width:600px){
+ #settingsPanel .bb-db-user-steps{grid-template-columns:1fr}
+ #settingsPanel .bb-db-admin-setup{padding:0 10px 12px}
+}

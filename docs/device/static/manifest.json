@@ -1,0 +1,19 @@
+{
+  "name": "BilaBot – Trợ lý XiaoZhi Web AI",
+  "short_name": "BilaBot",
+  "description": "Trợ lý AI tiếng Việt: Google Identity Services, ghép nối XiaoZhi OTA, WebSocket, Opus và MCP",
+  "lang": "vi",
+  "start_url": "../",
+  "scope": "../",
+  "display": "standalone",
+  "background_color": "#06121e",
+  "theme_color": "#102334",
+  "icons": [
+    {
+      "src": "./logo/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
