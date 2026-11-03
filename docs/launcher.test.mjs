@@ -46,3 +46,12 @@ test('vendored static assets are resolvable within the repository',()=>{
     assert.ok(existsSync(resolve(here,'device',ref)), 'Missing: '+ref);
   }
 });
+
+test('browser device keeps its own pairing identity and does not overwrite BilaBot storage',()=>{
+  const auth=read('device/auth.js');
+  assert.match(runtime,/td_olivia_assistants_v1/);
+  assert.match(runtime,/td_xiaozhi_web_client_settings/);
+  assert.match(runtime,/key\.startsWith\('td_olivia_'\)/);
+  assert.match(auth,/trinhduyet-connection-v2/);
+  assert.match(auth,/trinhduyet-transport-session-v2/);
+});
