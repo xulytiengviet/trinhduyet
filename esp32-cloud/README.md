@@ -1,5 +1,20 @@
 # Trình Duyệt ESP32 AI Cloud
 
+## Bắt đầu trong 3 bước — cho người dùng cuối
+
+**Không phải cài ứng dụng khi dùng chatbot trên web.**
+
+1. Mở [Trình Duyệt · BilaBot AI](https://xulytiengviet.github.io/trinhduyet/) → **Trò chuyện ngay**. BilaBot được hiển thị trực tiếp.
+2. Nếu BilaBot yêu cầu mã, chọn **Lấy mã XiaoZhi** trong giao diện hoặc mở [màn hình kích hoạt](https://xulytiengviet.github.io/Bilabot/#bb-setup); đăng nhập tại [XiaoZhi](https://xiaozhi.me/console/agents) để nhập mã sáu chữ số **do XiaoZhi cấp thật**.
+3. Sau khi BilaBot hiển thị **đã kết nối**, cho phép truy cập micro và bắt đầu trao đổi. Nếu nhúng iframe có vấn đề, dùng nút **Mở BilaBot toàn màn hình**.
+
+> Đối với người dùng chatbot, **không bắt buộc Gmail, không cần mua/nạp ESP32 và không cần thiết lập Render**. Mã XiaoZhi chỉ xuất hiện khi gateway provisioning của BilaBot đã sẵn sàng; không tạo mã giả. Chế độ ESP32 **thật** mới cần tài khoản Google, firmware và mã ghép nối riêng từ Render.
+
+Bố cục hiện tại là **chat-first dashboard**: khung AI lớn, hướng dẫn 3 bước ở cạnh phải, điều hướng gọn. Các công cụ quản trị chỉ hiện khi người dùng chọn hoặc mở thiết lập nâng cao. Trạng thái Render API riêng biệt với trạng thái kết nối XiaoZhi.
+
+---
+
+
 ## Cập nhật triển khai 03/11/2026
 
 **Đã tạo trên Render (My Workspace):**
