@@ -49,31 +49,34 @@
         <div class="chat-layout">
           <div class="chat-stage">
             <div class="chat-heading">
-              <div class="chat-profile"><span class="chat-avatar">✦</span><div><strong>BilaBot · Trợ lý AI</strong><small>XiaoZhi / Olivia · giọng nói và văn bản</small></div></div>
+              <div class="chat-profile"><span class="chat-avatar">✦</span><div><strong>BilaBot · Trợ lý AI</strong><small>Chat · Giọng nói · XiaoZhi / Olivia</small></div></div>
               <div class="chat-actions">
                 <a class="quiet-link" target="_blank" rel="noopener noreferrer" href="https://xulytiengviet.github.io/Bilabot/#bb-setup">Lấy mã XiaoZhi</a>
                 <a class="quiet-link" target="_blank" rel="noopener noreferrer" href="https://xulytiengviet.github.io/Bilabot/">Mở riêng ↗</a>
+                <button type="button" class="quiet-link guide-trigger" id="guide-toggle" aria-expanded="true" aria-controls="quick-guide">Ẩn hướng dẫn</button>
               </div>
             </div>
             <div id="olivia-intro" class="chat-intro">
-              <div class="intro-text"><b>Xin chào! Bắt đầu trò chuyện với BilaBot.</b><span>Không cần cài phần mềm. Nếu chưa ghép nối XiaoZhi, xem hướng dẫn 3 bước bên phải.</span></div>
+              <div class="intro-text"><b>BilaBot đã mở, bạn có thể bắt đầu.</b><span>Nếu cần ghép nối XiaoZhi, chọn Hướng dẫn 3 bước.</span></div>
               <button id="hide-ai-intro" type="button" aria-label="Ẩn lời giới thiệu">×</button>
             </div>
             <iframe id="olivia-ai-frame" class="olivia-ai-frame" title="Trợ lý BilaBot XiaoZhi" src="https://xulytiengviet.github.io/Bilabot/" loading="eager" allow="microphone; camera" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             <div class="chat-foot"><span>Tính năng AI hoạt động qua BilaBot và gateway XiaoZhi; trạng thái kết nối được hiển thị trong ứng dụng BilaBot.</span><button id="reload-ai-frame" type="button" title="Tải lại trợ lý">Tải lại ↻</button></div>
           </div>
-          <aside class="setup-panel" aria-label="Hướng dẫn bắt đầu">
+          <aside class="setup-panel" id="quick-guide" aria-label="Hướng dẫn bắt đầu">
             <div class="setup-topline"><span>HƯỚNG DẪN NHANH</span><span class="step-chip">3 BƯỚC</span></div>
-            <h1>Vào là dùng.<br><em>Không cần cài app.</em></h1>
-            <p class="setup-lead">Trợ lý đã mở bên trái. Khi XiaoZhi yêu cầu ghép nối, thực hiện lần lượt các bước sau.</p>
+            <div class="guide-head">
+              <div><h2>Vào là dùng.</h2><p>Không cần cài app. Nếu XiaoZhi yêu cầu mã, làm theo 3 bước:</p></div>
+              <button type="button" class="guide-close" id="guide-close" aria-label="Thu gọn hướng dẫn" title="Thu gọn">×</button>
+            </div>
             <ol class="quick-steps">
-              <li><span class="step-num">01</span><div><strong>Mở trợ lý</strong><p>Chọn trợ lý trong khung BilaBot, nhấn kết nối hoặc lấy mã kích hoạt.</p><a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer">Lấy mã thực ↗</a></div></li>
-              <li><span class="step-num">02</span><div><strong>Ghép mã tại XiaoZhi</strong><p>Đăng nhập dịch vụ XiaoZhi và nhập mã sáu chữ số được cấp từ BilaBot.</p><a href="https://xiaozhi.me/console/agents" target="_blank" rel="noopener noreferrer">Mở XiaoZhi ↗</a></div></li>
-              <li><span class="step-num">03</span><div><strong>Trò chuyện</strong><p>Quay lại BilaBot, cho phép dùng micro nếu cần. Chỉ bắt đầu sau khi ứng dụng xác nhận kết nối.</p><button type="button" id="focus-assistant" class="inline-action">Quay về khung AI →</button></div></li>
+              <li><span class="step-num">01</span><div><strong>Mở trợ lý</strong><p>Trong BilaBot, nhấn kết nối hoặc lấy mã kích hoạt.</p><a href="https://xulytiengviet.github.io/Bilabot/#bb-setup" target="_blank" rel="noopener noreferrer">Lấy mã thực ↗</a></div></li>
+              <li><span class="step-num">02</span><div><strong>Ghép mã XiaoZhi</strong><p>Đăng nhập XiaoZhi và nhập mã 6 chữ số từ BilaBot.</p><a href="https://xiaozhi.me/console/agents" target="_blank" rel="noopener noreferrer">Mở XiaoZhi ↗</a></div></li>
+              <li><span class="step-num">03</span><div><strong>Trò chuyện</strong><p>Quay lại BilaBot, cho phép micro nếu cần. Bắt đầu sau khi ứng dụng báo đã kết nối.</p><button type="button" id="focus-assistant" class="inline-action">Quay về khung AI →</button></div></li>
             </ol>
-            <a class="primary-launch" href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer">Mở BilaBot toàn màn hình ↗</a>
-            <details class="setup-faq"><summary>Tôi có cần ESP32 hoặc Gmail không?</summary><p>Chế độ chatbot trên trình duyệt không cần phần cứng ESP32 hay đăng nhập Google vào Trình Duyệt. Tài khoản XiaoZhi có thể cần cho việc kích hoạt. Chỉ khi quản lý ESP32 thật mới cần đăng nhập Google và nạp firmware.</p></details>
-            <details class="setup-faq"><summary>Không nhận được mã kích hoạt?</summary><p>Kiểm tra gateway trong BilaBot. Mã XiaoZhi do máy chủ cấp thật, không phải mã ghép nối ESP32 Cloud của Render. Nếu gateway chưa được cấu hình, không thể cấp mã.</p></details>
+            <a class="primary-launch" href="https://xulytiengviet.github.io/Bilabot/" target="_blank" rel="noopener noreferrer">Mở trợ lý toàn màn hình ↗</a>
+            <details class="setup-faq"><summary>Cần đăng nhập Google hoặc có ESP32?</summary><p>Không. Chế độ chatbot web không cần ESP32 thật hay đăng nhập Google vào Trình Duyệt. Việc kích hoạt XiaoZhi có thể cần tài khoản XiaoZhi.</p></details>
+            <details class="setup-faq"><summary>Không lấy được mã XiaoZhi?</summary><p>Mã phải do gateway XiaoZhi thực sự cấp. Nếu BilaBot chưa kết nối gateway, không thể sinh mã hợp lệ. Hãy mở BilaBot ở cửa sổ riêng để kiểm tra.</p></details>
           </aside>
         </div>
       </section>
