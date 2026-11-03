@@ -8,6 +8,8 @@ Bản này kế thừa mã client XiaoZhi ESP32 ảo của [Olivia AI](https://g
 - **Ghép**: `launcher.js` gửi lệnh `pair` đến `device-bridge.js` trên cùng origin. Lõi BilaBot gọi OTA theo đúng giao thức thông qua gateway Hono đã cấu hình; chỉ hiển thị mã 6 số nếu máy chủ thật sự trả mã.
 - **Trò chuyện**: sau khi XiaoZhi xác nhận mã, client tạo WebSocket qua gateway. Chỉ đánh dấu **Đã kết nối** khi nhận event `connected` sau khi WebSocket/hello xác nhận. Micro do người dùng cấp quyền và âm thanh Opus vẫn do client gốc xử lý.
 
+**Cách ly dữ liệu:** GitHub Pages dùng cùng origin cho nhiều repository, nên bản port này đặt tên khóa `td_olivia_*`, `td_xiaozhi_*` và `trinhduyet-*` riêng. Trạng thái thiết bị, sao lưu và thao tác reset trong Trình Duyệt không được động chạm kho dữ liệu của BilaBot ở repository bên cạnh. Các khóa và phiên cấp phát được giữ trong trình duyệt, không đưa vào URL.
+
 **Không thay thế** quy trình nhận mã XiaoZhi bằng đăng nhập Google hoặc mã ESP32 Cloud (Render). Backend quản lý ESP32 vật lý nằm riêng ở `esp32-cloud/` và `docs/cloud.html`.
 
 ## Gateway

@@ -288,7 +288,7 @@ const Logger = (() => {
 // failures can NEVER prevent BilaBot from booting.
 // ================================================================
 const AvatarStorage = (() => {
-  const KEY_PREFIX = 'olivia_avatar_v1_';
+  const KEY_PREFIX = 'td_olivia_avatar_v1_';
 
   function key(assistantId) {
     return KEY_PREFIX + assistantId;
@@ -575,7 +575,7 @@ const AvatarSystem = (() => {
 //   VolumeStorage.remove(assistantId)         → void
 // ================================================================
 const VolumeStorage = (() => {
-  const KEY_PREFIX = 'olivia_volume_v1_';
+  const KEY_PREFIX = 'td_olivia_volume_v1_';
 
   function key(assistantId) {
     return KEY_PREFIX + assistantId;
@@ -990,8 +990,8 @@ const VolumeSystem = (() => {
 // working completely unchanged.
 // ================================================================
 const AssistantManager = (() => {
-  const STORAGE_KEY = 'olivia_assistants_v1';
-  const LEGACY_SETTINGS_KEY = 'xiaozhi_web_client_settings';
+  const STORAGE_KEY = 'td_olivia_assistants_v1';
+  const LEGACY_SETTINGS_KEY = 'td_xiaozhi_web_client_settings';
 
   /** Flat legacy-key → nested Assistant-record path, used by the
    *  SettingsManager compatibility shim so old call sites keep working. */
@@ -5984,7 +5984,7 @@ const ImageInput = (() => {
 // Keyed separately so it is never accidentally wiped by AssistantManager.
 // ================================================================
 const BackupStorage = (() => {
-  const KEY = 'olivia_last_backup_ts';
+  const KEY = 'td_olivia_last_backup_ts';
 
   function save(isoString) {
     try {
@@ -6020,7 +6020,7 @@ const BackupStorage = (() => {
 const BackupSystem = (() => {
   const BILABOT_VERSION = '2.2';
   const BACKUP_VERSION = 1;
-  const LAST_BACKUP_KEY = 'olivia_last_backup_ts';
+  const LAST_BACKUP_KEY = 'td_olivia_last_backup_ts';
 
   // ── Helpers ──────────────────────────────────────────────
 
@@ -6045,7 +6045,7 @@ const BackupSystem = (() => {
   /**
    * Gather ALL BilaBot localStorage keys and their values.
    * This is future-proof: any new keys added to the app are
-   * automatically captured as long as they start with "olivia_".
+   * automatically captured as long as they start with "td_olivia_".
    */
   function gatherAllData() {
     const data = {};
@@ -6054,7 +6054,7 @@ const BackupSystem = (() => {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (!key) continue;
-      if (key.startsWith('olivia_') || key.startsWith('xiaozhi_')) {
+      if (key.startsWith('td_olivia_') || key.startsWith('td_xiaozhi_')) {
         try {
           data[key] = localStorage.getItem(key);
         } catch (e) { /* skip */ }
@@ -6098,7 +6098,7 @@ const BackupSystem = (() => {
     }
     // Must have at least one BilaBot key to be useful
     const keys = Object.keys(obj.data);
-    const oliviaKeys = keys.filter(k => k.startsWith('olivia_') || k.startsWith('xiaozhi_'));
+    const oliviaKeys = keys.filter(k => k.startsWith('td_olivia_') || k.startsWith('td_xiaozhi_'));
     if (oliviaKeys.length === 0) {
       return { valid: false, reason: 'Backup contains no BilaBot data.' };
     }
@@ -6189,7 +6189,7 @@ const BackupSystem = (() => {
     if (!overlay || !meta) return;
 
     const keys = Object.keys(backup.data || {});
-    const oliviaKeys = keys.filter(k => k.startsWith('olivia_') || k.startsWith('xiaozhi_'));
+    const oliviaKeys = keys.filter(k => k.startsWith('td_olivia_') || k.startsWith('td_xiaozhi_'));
 
     meta.innerHTML = [
       `<strong>Created:</strong> ${formatTimestamp(backup.createdAt)}`,
@@ -6215,7 +6215,7 @@ const BackupSystem = (() => {
       const keysToRemove = [];
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.startsWith('olivia_') || key.startsWith('xiaozhi_'))) {
+        if (key && (key.startsWith('td_olivia_') || key.startsWith('td_xiaozhi_'))) {
           keysToRemove.push(key);
         }
       }
@@ -6332,7 +6332,7 @@ const BackupSystem = (() => {
 // the @media (prefers-color-scheme) rule in style.css.
 // ================================================================
 const ThemeManager = (() => {
-  const STORAGE_KEY = 'olivia_theme_preference';
+  const STORAGE_KEY = 'td_olivia_theme_preference';
   const DARK  = 'dark';
   const LIGHT = 'light';
 
