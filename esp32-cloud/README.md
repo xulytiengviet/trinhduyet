@@ -8,7 +8,7 @@
 
 **Giao diện GitHub Pages:** `https://xulytiengviet.github.io/trinhduyet/` có mã nguồn ở thư mục gốc (`index.html`), `docs/` và `esp32-cloud/frontend/`. Việc xuất bản thực tế còn phụ thuộc cấu hình Pages trong Settings → Pages.
 
-**Đang ở chế độ setup_required:** Render API khởi động và trả JSON trạng thái trung thực, không báo đã ghép nối thiết bị. Còn phải cài GOOGLE_CLIENT_ID và DATABASE_URL trong Render. `ALLOWED_ORIGINS=https://xulytiengviet.github.io,https://xulytiengviet.github.io/trinhduyet` đã được cấu hình (Origin trình duyệt thực tế là `https://xulytiengviet.github.io`).
+**Cập nhật OAuth ngày 03/11/2026:** Đã cấu hình Web Client ID do chủ dự án cung cấp cho `config.js`, `docs/config.js`, build Cloudflare và biến `GOOGLE_CLIENT_ID` trên Render. Google JavaScript origin đã đặt `https://xulytiengviet.github.io`. **Client Secret không dùng, không được commit**. Còn thiếu `DATABASE_URL` trong Render; API có thể trả `setup_required` và chưa thể thực hiện đăng ký/ghép nối thiết bị thực. `ALLOWED_ORIGINS=https://xulytiengviet.github.io,https://xulytiengviet.github.io/trinhduyet` đã được cấu hình (Origin trình duyệt thực tế là `https://xulytiengviet.github.io`).
 
 **Hoàn tất hai biến riêng tư:** Tại [Render Web Service → Environment](https://dashboard.render.com/web/srv-dbkkj559fdbs73bjjukg/env), thêm:
 1. `DATABASE_URL` = Internal Database URL lấy trực tiếp từ trang database Render. Không chép URL này vào GitHub, Cloudflare hoặc trao đổi công khai.
