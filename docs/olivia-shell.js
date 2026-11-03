@@ -31,6 +31,11 @@
     const frame = document.getElementById('olivia-ai-frame');
     if (frame) frame.src = frame.src;
   });
+  document.getElementById('focus-assistant')?.addEventListener('click', () => {
+    const frame = document.getElementById('olivia-ai-frame');
+    frame?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    frame?.focus();
+  });
   document.querySelectorAll('a[target="_blank"]').forEach((a) => {
     a.rel = 'noopener noreferrer';
   });
