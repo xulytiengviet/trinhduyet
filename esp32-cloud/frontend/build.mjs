@@ -1,7 +1,7 @@
 import { mkdir, copyFile, writeFile } from 'node:fs/promises';
 const dir = new URL('./dist/', import.meta.url);
 await mkdir(dir, {recursive:true});
-for (const file of ['index.html','app.js','style.css']) {
+for (const file of ['index.html','app.js','style.css','olivia-shell.js']) {
   await copyFile(new URL('./'+file, import.meta.url), new URL('./'+file, dir));
 }
 const c = {
