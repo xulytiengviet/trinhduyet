@@ -6,11 +6,15 @@ on:
       - 'feat/esp32-ai-cloud-*'
     paths:
       - 'esp32-cloud/**'
+      - 'docs/**'
+      - 'index.html'
       - 'render.yaml'
       - '.github/workflows/esp32-cloud-ci.yml'
   pull_request:
     paths:
       - 'esp32-cloud/**'
+      - 'docs/**'
+      - 'index.html'
       - 'render.yaml'
       - '.github/workflows/esp32-cloud-ci.yml'
 
@@ -37,6 +41,8 @@ jobs:
         run: npm test
       - name: Check chat-first UI and navigation
         run: node --test esp32-cloud/frontend/ui.test.mjs
+      - name: Test native ESP32 Open / Pair / Chat UI
+        run: node --test docs/launcher.test.mjs
       - name: Build Cloudflare Pages dashboard
         working-directory: esp32-cloud/frontend
         env:
