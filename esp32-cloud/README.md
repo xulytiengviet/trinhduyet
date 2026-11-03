@@ -23,6 +23,23 @@ Tại GitHub Pages, thay `googleClientId: ""` trong `config.js` và `docs/config
 
 Đây là **thành phần bổ sung** của repository [trinhduyet](https://github.com/xulytiengviet/trinhduyet), không thay thế hoặc sửa lõi Go XiaoZhi hiện có.
 
+
+## Giao diện Việt hóa theo phong cách Olivia AI (03/11/2026)
+
+Giao diện mặc định tại `https://xulytiengviet.github.io/trinhduyet/` mở tab **Trò chuyện AI** theo bố cục messenger, gồm thanh điều hướng trái, danh sách trợ lý, vùng hội thoại và nút nhận mã XiaoZhi. Chế độ sáng/tối được lưu cục bộ trong trình duyệt.
+
+- **BilaBot** trong vùng hội thoại là ứng dụng AI hiện hữu phát triển dựa trên [Olivia AI](https://github.com/roalfb/olivia-ai) (MIT). Nội dung được nhúng bằng iframe từ `https://xulytiengviet.github.io/Bilabot/`; người dùng có thể mở BilaBot ở cửa sổ riêng.
+- **Không giả lập cuộc hội thoại:** chức năng micro, tin nhắn, camera và XiaoZhi OTA chỉ hoạt động nếu gateway hiện hữu của BilaBot sẵn sàng, được trình duyệt cấp quyền và trang đích cho phép nhúng.
+- **ESP32 Cloud** vẫn giữ các mục Đăng nhập Google, Thiết bị ESP32, Tổng quan và Firmware OTA; mã ghép nối Render API không được dùng thay mã XiaoZhi.
+- Bản phát hành GitHub Pages có nguồn ở `docs/` (khi Pages chọn `main /docs`) và dự phòng `index.html` (khi chọn `main /root`). Hai cách đều trỏ tới cùng nền tảng ứng dụng.
+- Bản Cloudflare Pages từ `esp32-cloud/frontend/` cũng mang cùng giao diện; lệnh build chép `olivia-shell.js` vào `dist/`.
+
+**Giới hạn kiến trúc:** Đây là giao diện tích hợp Olivia/BilaBot bằng trang nhúng, không phải bản port toàn bộ giao thức Hono/Opus/WebSocket từ Olivia sang backend Render. GitHub Pages tĩnh không thay thế được proxy WebSocket/OTA header injection của Cloudflare. Dùng gateway BilaBot hoặc triển khai dịch vụ Hono tương thích trước khi quảng cáo kết nối XiaoZhi trực tiếp.
+
+Ghi nhận nguồn: [roalfb/olivia-ai](https://github.com/roalfb/olivia-ai) · [xulytiengviet/Bilabot](https://github.com/xulytiengviet/Bilabot) · [hackers365/xiaozhi-esp32-server-golang](https://github.com/hackers365/xiaozhi-esp32-server-golang). Giao diện mới viết lại dựa trên đặc điểm thiết kế, không sao chép nguyên CSS hoặc tài nguyên hình ảnh của Olivia.
+
+---
+
 ## Các thành phần
 
 - **Cloudflare Pages** (`frontend/`): giao diện tiếng Việt, Google Identity Services, đăng ký thiết bị, nhập mã ghép nối, xem heartbeat, hướng dẫn OTA.
